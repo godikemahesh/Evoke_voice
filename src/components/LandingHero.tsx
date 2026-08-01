@@ -153,6 +153,7 @@ export const LandingHero: React.FC<Props> = ({
               <img
                 src={heroCreator.coverImage || 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=1200'}
                 alt={heroCreator.name}
+                referrerPolicy="no-referrer"
                 className="w-full h-full object-cover filter brightness-90"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-black/40"></div>
@@ -639,7 +640,7 @@ export const LandingHero: React.FC<Props> = ({
                 className="w-full py-4 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white font-bold text-sm shadow-xl shadow-indigo-500/25 hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
               >
                 <Sparkles className="w-4 h-4 text-amber-300" />
-                <span>Book This Custom Surprise (₹{sandboxCreator.voicePrice || 499})</span>
+                <span>Book This Custom Surprise (₹{sandboxCreator.voicePrice || 99})</span>
               </button>
             </div>
 
@@ -963,7 +964,7 @@ export const LandingHero: React.FC<Props> = ({
               <div className="space-y-4">
                 <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest">Instant Call</span>
                 <h3 className="text-2xl font-bold text-white font-serif">Voice Surprise Call</h3>
-                <div className="text-4xl font-black text-white">₹499 <span className="text-xs text-slate-400 font-normal">/ surprise</span></div>
+                <div className="text-4xl font-black text-white">₹99 <span className="text-xs text-slate-400 font-normal">/ surprise</span></div>
                 <ul className="space-y-3 text-xs text-slate-300 pt-2">
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> Scheduled 12:00 AM Call</li>
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> AI Studio Script Personalization</li>
@@ -984,7 +985,7 @@ export const LandingHero: React.FC<Props> = ({
               <div className="space-y-4">
                 <span className="text-xs font-bold text-purple-400 uppercase tracking-widest">4K Video HD</span>
                 <h3 className="text-2xl font-bold text-white font-serif">Video Message</h3>
-                <div className="text-4xl font-black text-white">₹1,499 <span className="text-xs text-slate-400 font-normal">/ surprise</span></div>
+                <div className="text-4xl font-black text-white">₹59 <span className="text-xs text-slate-400 font-normal">/ surprise</span></div>
                 <ul className="space-y-3 text-xs text-slate-300 pt-2">
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> 4K Ultra HD Video File</li>
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> Studio Facial Lip-Sync AI</li>
@@ -1009,7 +1010,7 @@ export const LandingHero: React.FC<Props> = ({
               <div className="space-y-4 pt-2">
                 <span className="text-xs font-bold text-amber-300 uppercase tracking-widest">Ultimate Gift</span>
                 <h3 className="text-2xl font-bold text-white font-serif">Midnight Bundle</h3>
-                <div className="text-4xl font-black text-white">₹1,799 <span className="text-xs text-slate-400 font-normal">/ complete surprise</span></div>
+                <div className="text-4xl font-black text-white">₹129 <span className="text-xs text-slate-400 font-normal">/ complete surprise</span></div>
                 <ul className="space-y-3 text-xs text-slate-200 pt-2">
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> Live 12:00 AM Midnight Phone Call</li>
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> 4K Ultra HD Personal Video File</li>

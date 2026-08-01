@@ -29,6 +29,10 @@ export const CreatorCard: React.FC<Props> = ({ creator, onSelect, onPlaySample }
         <img
           src={creator.avatar}
           alt={creator.name}
+          referrerPolicy="no-referrer"
+          onError={(e) => {
+            e.currentTarget.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=800';
+          }}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
@@ -41,8 +45,14 @@ export const CreatorCard: React.FC<Props> = ({ creator, onSelect, onPlaySample }
         </div>
 
         {/* Category Badge */}
-        <div className="absolute top-3 right-3 bg-indigo-950/80 backdrop-blur-md px-2.5 py-1 rounded-full border border-indigo-500/40 text-[10px] font-bold text-indigo-300 uppercase tracking-wider">
-          {creator.category}
+        <div className="absolute top-3 right-3 flex items-center gap-1.5">
+          <span className="bg-emerald-950/90 backdrop-blur-md px-2.5 py-1 rounded-full border border-emerald-500/60 text-[10px] font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1 shadow-md">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            Coming Soon
+          </span>
+          <span className="bg-indigo-950/80 backdrop-blur-md px-2.5 py-1 rounded-full border border-indigo-500/40 text-[10px] font-bold text-indigo-300 uppercase tracking-wider">
+            {creator.category}
+          </span>
         </div>
 
         {/* Voice Audio Sample Button */}

@@ -91,6 +91,10 @@ export const CreatorDetailView: React.FC<Props> = ({ creator, onBack, onProceed 
             <img
               src={creator.coverImage}
               alt={creator.name}
+              referrerPolicy="no-referrer"
+              onError={(e) => {
+                e.currentTarget.src = 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=1200';
+              }}
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
@@ -103,17 +107,25 @@ export const CreatorDetailView: React.FC<Props> = ({ creator, onBack, onProceed 
                   <img
                     src={creator.avatar}
                     alt={creator.name}
+                    referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      e.currentTarget.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=800';
+                    }}
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div>
-                  <div className="flex items-center gap-2 mb-1">
+                  <div className="flex items-center gap-2 mb-1 flex-wrap">
+                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-950/90 border border-emerald-500/60 text-[11px] font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1 shadow-md">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                      Coming Soon
+                    </span>
                     <span className="px-2.5 py-0.5 rounded-full bg-indigo-950/80 border border-indigo-500/40 text-[11px] font-bold text-indigo-300 uppercase tracking-wider">
                       {creator.category}
                     </span>
-                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-[11px] font-bold text-emerald-300 flex items-center gap-1">
-                      <CheckCircle className="w-3 h-3" />
-                      Verified
+                    <span className="px-2.5 py-0.5 rounded-full bg-slate-800/80 border border-slate-700 text-[11px] font-bold text-slate-300 flex items-center gap-1">
+                      <CheckCircle className="w-3 h-3 text-indigo-400" />
+                      Verified Celeb
                     </span>
                   </div>
                   <h1 className="text-2xl sm:text-4xl font-black text-white font-serif">{creator.name}</h1>
