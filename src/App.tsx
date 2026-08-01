@@ -103,6 +103,12 @@ export default function App() {
 
   // Handlers
   const handleSelectCreator = (creator: Creator) => {
+    if (!user) {
+      setPendingBooking(null);
+      setAuthInitialMode('login');
+      setIsAuthModalOpen(true);
+      return;
+    }
     setSelectedCreator(creator);
     setActiveTab('creator');
     window.scrollTo({ top: 0, behavior: 'smooth' });

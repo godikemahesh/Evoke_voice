@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, ShieldCheck, Mail, Phone, Lock, Sparkles, User as UserIcon, ArrowRight, Eye, EyeOff, CheckCircle2 } from 'lucide-react';
 import { User } from '../types';
 
@@ -17,6 +17,14 @@ export const AuthModal: React.FC<Props> = ({
 }) => {
   const [authMode, setAuthMode] = useState<'login' | 'register'>(initialMode);
   const [method, setMethod] = useState<'google' | 'email' | 'mobile'>('email');
+
+  // Sync authMode when modal opens with initialMode
+  useEffect(() => {
+    if (isOpen) {
+      setAuthMode(initialMode);
+      setErrorMsg('');
+    }
+  }, [isOpen, initialMode]);
 
   // Form states
   const [fullName, setFullName] = useState('');

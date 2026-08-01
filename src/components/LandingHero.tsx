@@ -16,7 +16,9 @@ import {
   X,
   Radio,
   Award,
-  Shield
+  Shield,
+  Lock,
+  ShieldCheck
 } from 'lucide-react';
 import { CanvasShaderBackground } from './CanvasShaderBackground';
 import { Creator } from '../types';
@@ -262,7 +264,7 @@ export const LandingHero: React.FC<Props> = ({
             <div className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800/80 hover:border-purple-500/40 transition-all group backdrop-blur-md shadow-xl">
               <div className="relative h-56 rounded-2xl overflow-hidden mb-4">
                 <img
-                  src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=600"
+                  src="https://as2.ftcdn.net/v2/jpg/05/35/73/83/1000_F_535738304_3h3lzjXVmqlkaJXawnIKzwwVp0t6sYfB.jpg"
                   alt="Graduation Moment"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -779,7 +781,7 @@ export const LandingHero: React.FC<Props> = ({
             <p className="text-slate-400 text-sm">Built with studio-grade ethics, precision timing, and AI excellence</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
             <div className="p-8 rounded-3xl bg-slate-900/80 border border-slate-800 hover:border-indigo-500/50 transition-all space-y-4 shadow-xl">
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-600 p-0.5">
                 <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center text-indigo-400">
@@ -825,6 +827,18 @@ export const LandingHero: React.FC<Props> = ({
               <h3 className="text-xl font-bold text-white">Personalized Messages</h3>
               <p className="text-slate-400 text-xs leading-relaxed">
                 Every message is crafted with Gemini AI Studio tailored to inside jokes, recipient passions, and your exact emotional tone.
+              </p>
+            </div>
+
+            <div className="p-8 rounded-3xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/50 transition-all space-y-4 shadow-xl">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-600 p-0.5">
+                <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center text-emerald-400">
+                  <ShieldCheck className="w-7 h-7" />
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-white">Security & Privacy</h3>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                We guarantee 100% security and privacy. We never misuse or unauthorizedly use any voice model or personal information — all data is encrypted and strictly confidential.
               </p>
             </div>
           </div>
