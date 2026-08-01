@@ -96,7 +96,7 @@ export const MOCK_CREATORS: Creator[] = [
     name: 'Ram Charan',
     tagline: 'Mega Power Star & Global RRR Hero',
     category: 'Tollywood',
-    avatar: 'https://th.bing.com/th/id/R.4f1a4096b57bfbfb3be80ec96e5902cb?rik=y7sYQLouFoe4Sw&riu=http%3a%2f%2f1.bp.blogspot.com%2f-UONR7ORDT58%2fUiSWKfshRNI%2fAAAAAAAAHQs%2fDSBKwkiccHA%2fs320%2fram-charan-tadaka-mollywood647x450.jpg&ehk=136smpyBi5MRT6CFMn42OUjeY8SUChVEQEUxObBSWTs%3d&risl=&pid=ImgRaw&r=0',
+    avatar: 'https://tse1.mm.bing.net/th/id/OIF.VM4h2R0cDzo7AKX2ZUlppw?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
     coverImage: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80&w=1200',
     rating: 4.94,
     reviewsCount: 11200,
