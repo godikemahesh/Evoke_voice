@@ -113,7 +113,7 @@ export const Navbar: React.FC<Props> = ({
                   onClick={() => setActiveTab('discover')}
                   className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-all flex items-center gap-1 ${
                     activeTab === 'discover' || activeTab === 'creator'
-                      ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-sm shadow-indigo-500/20'
+                      ? 'bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-slate-950 font-semibold shadow-sm shadow-amber-500/20'
                       : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
                   }`}
                 >
@@ -124,14 +124,14 @@ export const Navbar: React.FC<Props> = ({
                   onClick={() => setActiveTab('my-orders')}
                   className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-all flex items-center gap-1 ${
                     activeTab === 'my-orders'
-                      ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-sm shadow-indigo-500/20'
+                      ? 'bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-slate-950 font-semibold shadow-sm shadow-amber-500/20'
                       : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
                   }`}
                 >
                   <Calendar className="w-3 h-3" />
                   My Surprises
                   {upcomingCount > 0 && (
-                    <span className="ml-0.5 px-1.5 py-0.2 text-[9px] font-bold bg-pink-500 text-white rounded-full animate-pulse">
+                    <span className="ml-0.5 px-1.5 py-0.2 text-[9px] font-bold bg-amber-400 text-slate-950 rounded-full animate-pulse">
                       {upcomingCount}
                     </span>
                   )}
@@ -140,7 +140,7 @@ export const Navbar: React.FC<Props> = ({
                   onClick={() => setActiveTab('ai-assistant')}
                   className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-all flex items-center gap-1 ${
                     activeTab === 'ai-assistant'
-                      ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-sm shadow-indigo-500/20'
+                      ? 'bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-slate-950 font-semibold shadow-sm shadow-amber-500/20'
                       : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
                   }`}
                 >
@@ -163,32 +163,32 @@ export const Navbar: React.FC<Props> = ({
 
             <button
               onClick={handleCreateSurpriseClick}
-              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-medium text-[11px] shadow-sm shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-lg bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-bold text-[11px] shadow-sm shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
-              <Sparkles className="w-3 h-3" />
+              <Sparkles className="w-3 h-3 text-slate-950" />
               <span>Create a Surprise</span>
             </button>
 
             {user?.isLoggedIn ? (
               <button
                 onClick={() => setActiveTab('settings')}
-                className="flex items-center gap-1.5 pl-1 pr-2 py-0.5 rounded-full bg-slate-900 border border-slate-800 hover:border-indigo-500/50 transition-all group"
+                className="flex items-center gap-1.5 pl-1 pr-2 py-0.5 rounded-full bg-slate-900 border border-slate-800 hover:border-amber-500/50 transition-all group"
               >
                 <img
                   src={user.avatar}
                   alt={user.name}
-                  className="w-5 h-5 rounded-full object-cover ring-2 ring-indigo-500/50"
+                  className="w-5 h-5 rounded-full object-cover ring-2 ring-amber-500/50"
                 />
-                <span className="text-[11px] font-medium text-slate-200 group-hover:text-white hidden lg:inline">
+                <span className="text-[11px] font-medium text-slate-200 group-hover:text-amber-400 hidden lg:inline">
                   {user.name.split(' ')[0]}
                 </span>
               </button>
             ) : (
               <button
                 onClick={onOpenAuth}
-                className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 hover:text-white text-[11px] font-medium transition-all"
+                className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-amber-500/30 text-amber-300 hover:text-amber-200 hover:border-amber-500/60 text-[11px] font-medium transition-all"
               >
-                <UserIcon className="w-3 h-3 text-indigo-400" />
+                <UserIcon className="w-3 h-3 text-amber-400" />
                 <span>Sign In / Register</span>
               </button>
             )}

@@ -22,7 +22,7 @@ export const CreatorCard: React.FC<Props> = ({ creator, onSelect, onPlaySample }
   return (
     <div
       onClick={() => onSelect(creator)}
-      className="group relative bg-slate-900/90 rounded-3xl overflow-hidden border border-slate-800 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-1.5 cursor-pointer shadow-xl hover:shadow-indigo-500/10 flex flex-col justify-between"
+      className="group relative bg-slate-900/90 rounded-3xl overflow-hidden border border-slate-800 hover:border-amber-500/50 transition-all duration-300 hover:-translate-y-1.5 cursor-pointer shadow-xl hover:shadow-amber-500/10 flex flex-col justify-between"
     >
       {/* Top Banner & Photo */}
       <div className="relative h-64 overflow-hidden">
@@ -50,7 +50,7 @@ export const CreatorCard: React.FC<Props> = ({ creator, onSelect, onPlaySample }
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
             Coming Soon
           </span>
-          <span className="bg-indigo-950/80 backdrop-blur-md px-2.5 py-1 rounded-full border border-indigo-500/40 text-[10px] font-bold text-indigo-300 uppercase tracking-wider">
+          <span className="bg-amber-950/80 backdrop-blur-md px-2.5 py-1 rounded-full border border-amber-500/40 text-[10px] font-bold text-amber-300 uppercase tracking-wider">
             {creator.category}
           </span>
         </div>
@@ -59,7 +59,7 @@ export const CreatorCard: React.FC<Props> = ({ creator, onSelect, onPlaySample }
         {creator.audioSampleText && (
           <button
             onClick={handleSampleClick}
-            className="absolute bottom-3 right-3 px-3 py-1.5 rounded-full bg-slate-900/90 hover:bg-indigo-600 backdrop-blur-md border border-slate-700 text-xs text-indigo-300 hover:text-white font-medium flex items-center gap-1.5 transition-all shadow-lg group/btn"
+            className="absolute bottom-3 right-3 px-3 py-1.5 rounded-full bg-slate-900/90 hover:bg-amber-500 backdrop-blur-md border border-amber-500/30 text-xs text-amber-300 hover:text-slate-950 font-medium flex items-center gap-1.5 transition-all shadow-lg group/btn"
             title="Listen Voice Preview"
           >
             {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -72,10 +72,10 @@ export const CreatorCard: React.FC<Props> = ({ creator, onSelect, onPlaySample }
       <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
         <div>
           <div className="flex items-center gap-1.5 mb-1">
-            <h3 className="text-lg font-bold text-white group-hover:text-indigo-300 transition-colors">
+            <h3 className="text-lg font-bold text-white group-hover:text-amber-300 transition-colors">
               {creator.name}
             </h3>
-            <CheckCircle className="w-4 h-4 text-indigo-400 fill-indigo-400/20" />
+            <CheckCircle className="w-4 h-4 text-amber-400 fill-amber-400/20" />
           </div>
           <p className="text-xs text-slate-400 font-medium line-clamp-1">{creator.tagline}</p>
 
@@ -108,11 +108,11 @@ export const CreatorCard: React.FC<Props> = ({ creator, onSelect, onPlaySample }
             <div className="w-px h-6 bg-slate-800"></div>
             <div>
               <span className="text-[10px] text-slate-400 block">4K Video</span>
-              <span className="font-bold text-indigo-400">₹{creator.videoPrice}</span>
+              <span className="font-bold text-amber-400">₹{creator.videoPrice}</span>
             </div>
           </div>
 
-          <button className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-semibold text-xs shadow-md shadow-indigo-500/20 transition-all">
+          <button className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:brightness-110 text-slate-950 font-bold text-xs shadow-md shadow-amber-500/20 transition-all">
             Book Now
           </button>
         </div>

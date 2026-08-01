@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, ShieldCheck, Mail, Phone, Lock, Sparkles, User as UserIcon, ArrowRight, Eye, EyeOff, CheckCircle2 } from 'lucide-react';
 import { User } from '../types';
+import { EvokeLogo } from './EvokeLogo';
 
 interface Props {
   isOpen: boolean;
@@ -83,13 +84,11 @@ export const AuthModal: React.FC<Props> = ({
 
         {/* Brand Header */}
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 p-0.5 mx-auto shadow-lg shadow-indigo-500/30">
-            <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-              <Sparkles className="w-6 h-6 text-indigo-400" />
-            </div>
+          <div className="flex justify-center mb-2">
+            <EvokeLogo size="lg" showText={true} className="justify-center" />
           </div>
-          <h2 className="text-2xl font-black font-serif text-white tracking-tight">
-            {authMode === 'register' ? 'Create Your Evoke Account' : 'Welcome Back to Evoke'}
+          <h2 className="text-xl font-bold text-white tracking-tight">
+            {authMode === 'register' ? 'Create Your Account' : 'Welcome Back'}
           </h2>
           <p className="text-xs text-slate-400">
             {authMode === 'register'
@@ -107,7 +106,7 @@ export const AuthModal: React.FC<Props> = ({
             }}
             className={`flex-1 py-2.5 rounded-xl transition-all ${
               authMode === 'register'
-                ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/20'
+                ? 'bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-bold shadow-lg shadow-amber-500/20'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -120,7 +119,7 @@ export const AuthModal: React.FC<Props> = ({
             }}
             className={`flex-1 py-2.5 rounded-xl transition-all ${
               authMode === 'login'
-                ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/20'
+                ? 'bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-bold shadow-lg shadow-amber-500/20'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -313,7 +312,7 @@ export const AuthModal: React.FC<Props> = ({
             {/* Primary Action Button */}
             <button
               type="submit"
-              className="w-full py-4 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white font-bold text-sm shadow-xl shadow-indigo-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+              className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-bold text-sm shadow-xl shadow-amber-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
             >
               <span>{authMode === 'register' ? 'Register & Continue to Booking' : 'Sign In & Continue'}</span>
               <ArrowRight className="w-4 h-4" />
@@ -332,7 +331,7 @@ export const AuthModal: React.FC<Props> = ({
                   setAuthMode('login');
                   setErrorMsg('');
                 }}
-                className="font-bold text-indigo-400 hover:underline"
+                className="font-bold text-amber-400 hover:underline"
               >
                 Sign In here
               </button>
@@ -346,7 +345,7 @@ export const AuthModal: React.FC<Props> = ({
                   setAuthMode('register');
                   setErrorMsg('');
                 }}
-                className="font-bold text-indigo-400 hover:underline"
+                className="font-bold text-amber-400 hover:underline"
               >
                 Create Account
               </button>

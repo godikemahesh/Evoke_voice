@@ -524,10 +524,10 @@ export const BookingFlowModal: React.FC<Props> = ({
 
               <button
                 onClick={() => setStep(4)}
-                className="w-full py-4 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white font-bold text-base shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/40 transition-all flex items-center justify-center gap-2"
+                className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-bold text-base shadow-xl shadow-amber-500/20 hover:shadow-amber-500/40 transition-all flex items-center justify-center gap-2"
               >
                 <span>Review Order & Pay (₹{totalPrice})</span>
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-5 h-5 text-slate-950" />
               </button>
             </div>
           )}
@@ -638,16 +638,16 @@ export const BookingFlowModal: React.FC<Props> = ({
               <button
                 onClick={handleConfirmAndPay}
                 disabled={isProcessingPayment}
-                className="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-indigo-600 to-purple-600 text-white font-bold text-base shadow-xl shadow-indigo-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+                className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-bold text-base shadow-xl shadow-amber-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
               >
                 {isProcessingPayment ? (
                   <>
-                    <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                    <span className="w-5 h-5 border-2 border-slate-950 border-t-transparent rounded-full animate-spin"></span>
                     <span>Scheduling Midnight Surprise...</span>
                   </>
                 ) : (
                   <>
-                    <ShieldCheck className="w-5 h-5 text-emerald-300" />
+                    <ShieldCheck className="w-5 h-5 text-slate-950" />
                     <span>Confirm & Schedule Surprise (₹{totalPrice})</span>
                   </>
                 )}

@@ -82,7 +82,7 @@ export const LandingHero: React.FC<Props> = ({
         <div className="text-center max-w-4xl mx-auto space-y-4 mb-12">
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black font-serif tracking-tight leading-[1.1] text-white">
             Imagine the phone rings at{' '}
-            <span className="bg-gradient-to-r from-amber-300 via-pink-400 to-indigo-400 bg-clip-text text-transparent underline decoration-indigo-500/30">
+            <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500 bg-clip-text text-transparent underline decoration-amber-500/40">
               exactly midnight...
             </span>
           </h1>
@@ -103,18 +103,18 @@ export const LandingHero: React.FC<Props> = ({
                   onExplore();
                 }
               }}
-              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white font-bold text-base shadow-2xl shadow-indigo-500/40 hover:shadow-indigo-500/60 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3 group"
+              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-black text-base shadow-2xl shadow-amber-500/30 hover:shadow-amber-500/50 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3 group"
             >
-              <Sparkles className="w-5 h-5 text-amber-300 group-hover:rotate-12 transition-transform" />
+              <Sparkles className="w-5 h-5 text-slate-950 group-hover:rotate-12 transition-transform" />
               <span>Surprise Someone</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
 
             <button
               onClick={() => setDemoModalOpen(true)}
-              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-slate-200 hover:text-white font-semibold text-base transition-all flex items-center justify-center gap-2 backdrop-blur-xl group"
+              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-amber-500/30 hover:border-amber-500/60 text-amber-300 hover:text-amber-200 font-semibold text-base transition-all flex items-center justify-center gap-2 backdrop-blur-xl group"
             >
-              <Play className="w-4 h-4 text-indigo-400 fill-indigo-400 group-hover:scale-110 transition-transform" />
+              <Play className="w-4 h-4 text-amber-400 fill-amber-400 group-hover:scale-110 transition-transform" />
               <span>Watch Demo</span>
             </button>
           </div>
@@ -485,7 +485,7 @@ export const LandingHero: React.FC<Props> = ({
             </div>
             <button
               onClick={onExplore}
-              className="px-5 py-2.5 rounded-2xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-indigo-400 hover:text-indigo-300 font-bold text-xs flex items-center gap-2 transition-all"
+              className="px-5 py-2.5 rounded-2xl bg-slate-900 hover:bg-slate-800 border border-amber-500/30 text-amber-400 hover:text-amber-300 font-bold text-xs flex items-center gap-2 transition-all"
             >
               <span>Explore All Creators</span>
               <ChevronRight className="w-4 h-4" />
@@ -552,7 +552,7 @@ export const LandingHero: React.FC<Props> = ({
                       <span className="text-slate-400 block text-[10px]">Video Message</span>
                       <span className="font-bold text-indigo-400">₹{creator.videoPrice}</span>
                     </div>
-                    <button className="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs transition-colors shadow-md shadow-indigo-500/20">
+                    <button className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-bold text-xs transition-colors shadow-md shadow-amber-500/20">
                       Book
                     </button>
                   </div>
@@ -639,9 +639,9 @@ export const LandingHero: React.FC<Props> = ({
 
               <button
                 onClick={() => onStartBooking(sandboxCreator)}
-                className="w-full py-4 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white font-bold text-sm shadow-xl shadow-indigo-500/25 hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
+                className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-bold text-sm shadow-xl shadow-amber-500/25 hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
               >
-                <Sparkles className="w-4 h-4 text-amber-300" />
+                <Sparkles className="w-4 h-4 text-slate-950" />
                 <span>Book This Custom Surprise (₹{sandboxCreator.voicePrice || 99})</span>
               </button>
             </div>
@@ -1016,15 +1016,15 @@ export const LandingHero: React.FC<Props> = ({
             </div>
 
             {/* Bundle - Most Popular */}
-            <div className="p-8 rounded-3xl bg-gradient-to-b from-indigo-950 via-slate-900 to-slate-900 border-2 border-indigo-500 flex flex-col justify-between space-y-6 shadow-2xl relative">
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-[10px] font-black uppercase text-white tracking-wider shadow-lg">
+            <div className="p-8 rounded-3xl bg-gradient-to-b from-amber-950/40 via-slate-900 to-slate-900 border-2 border-amber-500/80 flex flex-col justify-between space-y-6 shadow-2xl relative">
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-[10px] font-black uppercase text-slate-950 tracking-wider shadow-lg">
                 Most Popular
               </div>
 
               <div className="space-y-4 pt-2">
-                <span className="text-xs font-bold text-amber-300 uppercase tracking-widest">Ultimate Gift</span>
+                <span className="text-xs font-bold text-amber-400 uppercase tracking-widest">Ultimate Gift</span>
                 <h3 className="text-2xl font-bold text-white font-serif">Midnight Bundle</h3>
-                <div className="text-4xl font-black text-white">₹129 <span className="text-xs text-slate-400 font-normal">/ complete surprise</span></div>
+                <div className="text-4xl font-black text-amber-300">₹129 <span className="text-xs text-slate-400 font-normal">/ complete surprise</span></div>
                 <ul className="space-y-3 text-xs text-slate-200 pt-2">
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> Live 12:00 AM Midnight Phone Call</li>
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> 4K Ultra HD Personal Video File</li>
@@ -1035,7 +1035,7 @@ export const LandingHero: React.FC<Props> = ({
 
               <button
                 onClick={() => onStartBooking(heroCreator)}
-                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-xs font-bold shadow-xl shadow-indigo-500/30 hover:scale-105 transition-all"
+                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-bold text-xs shadow-xl shadow-amber-500/30 hover:scale-105 transition-all"
               >
                 Get Midnight Bundle
               </button>
@@ -1068,9 +1068,9 @@ export const LandingHero: React.FC<Props> = ({
 
           <button
             onClick={() => onStartBooking(heroCreator)}
-            className="px-10 py-5 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white font-black text-lg shadow-2xl shadow-indigo-500/40 hover:scale-105 active:scale-95 transition-all inline-flex items-center gap-3"
+            className="px-10 py-5 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-black text-lg shadow-2xl shadow-amber-500/40 hover:scale-105 active:scale-95 transition-all inline-flex items-center gap-3"
           >
-            <Sparkles className="w-6 h-6 text-amber-300" />
+            <Sparkles className="w-6 h-6 text-slate-950" />
             <span>Create Your First Surprise</span>
             <ArrowRight className="w-6 h-6" />
           </button>

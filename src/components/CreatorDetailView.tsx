@@ -235,12 +235,12 @@ export const CreatorDetailView: React.FC<Props> = ({ creator, onBack, onProceed 
                   onClick={() => setSelectedType('video')}
                   className={`p-4 rounded-2xl border-2 transition-all cursor-pointer flex items-center justify-between ${
                     selectedType === 'video'
-                      ? 'bg-indigo-950/60 border-indigo-500 text-white shadow-lg shadow-indigo-500/10'
+                      ? 'bg-amber-950/40 border-amber-500 text-white shadow-lg shadow-amber-500/10'
                       : 'bg-slate-950/60 border-slate-800 hover:border-slate-700 text-slate-300'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="p-2.5 rounded-xl bg-indigo-600/20 text-indigo-400">
+                    <div className="p-2.5 rounded-xl bg-amber-500/20 text-amber-400">
                       <Video className="w-5 h-5" />
                     </div>
                     <div>
@@ -249,7 +249,7 @@ export const CreatorDetailView: React.FC<Props> = ({ creator, onBack, onProceed 
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-lg font-black text-white">₹{creator.videoPrice}</div>
+                    <div className="text-lg font-black text-amber-300">₹{creator.videoPrice}</div>
                   </div>
                 </div>
 
@@ -257,12 +257,12 @@ export const CreatorDetailView: React.FC<Props> = ({ creator, onBack, onProceed 
                   onClick={() => setSelectedType('voice')}
                   className={`p-4 rounded-2xl border-2 transition-all cursor-pointer flex items-center justify-between ${
                     selectedType === 'voice'
-                      ? 'bg-purple-950/60 border-purple-500 text-white shadow-lg shadow-purple-500/10'
+                      ? 'bg-amber-950/40 border-amber-500 text-white shadow-lg shadow-amber-500/10'
                       : 'bg-slate-950/60 border-slate-800 hover:border-slate-700 text-slate-300'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="p-2.5 rounded-xl bg-purple-600/20 text-purple-400">
+                    <div className="p-2.5 rounded-xl bg-amber-500/20 text-amber-400">
                       <Phone className="w-5 h-5" />
                     </div>
                     <div>
@@ -271,7 +271,7 @@ export const CreatorDetailView: React.FC<Props> = ({ creator, onBack, onProceed 
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-lg font-black text-white">₹{creator.voicePrice}</div>
+                    <div className="text-lg font-black text-amber-300">₹{creator.voicePrice}</div>
                   </div>
                 </div>
               </div>
@@ -280,14 +280,14 @@ export const CreatorDetailView: React.FC<Props> = ({ creator, onBack, onProceed 
               <div className="pt-4 border-t border-slate-800 space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="text-slate-400 text-sm">Total Price:</span>
-                  <span className="text-2xl font-black text-white">₹{price}</span>
+                  <span className="text-2xl font-black text-amber-400">₹{price}</span>
                 </div>
 
                 <button
                   onClick={() => onProceed(creator, selectedType)}
-                  className="w-full py-4 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white font-bold text-base shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+                  className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-bold text-base shadow-xl shadow-amber-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
                 >
-                  <Sparkles className="w-5 h-5 text-amber-300" />
+                  <Sparkles className="w-5 h-5 text-slate-950" />
                   <span>Personalize Surprise</span>
                 </button>
               </div>
