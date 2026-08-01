@@ -1,0 +1,6 @@
+{
+  "name": "Evoke - AI Voice & Video Surprises",
+  "description": "Unforgettable AI voice calls and personalized video surprises from world-class creators delivered at exactly midnight.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
