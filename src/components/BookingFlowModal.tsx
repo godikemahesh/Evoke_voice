@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
-  X, ArrowLeft, ArrowRight, Sparkles, Calendar, Clock, User as UserIcon, Heart,
-  Cake, GraduationCap, Rocket, Gift, Trophy, Crown, CheckCircle2, Volume2, Play, Pause, CreditCard, ShieldCheck, Tag
+  X, ArrowLeft, ArrowRight, Sparkles, Cake, GraduationCap, Rocket, Heart,
+  Gift, Trophy, Crown, CheckCircle2, Volume2, Play, Pause, ShieldCheck, Tag
 } from 'lucide-react';
 import { Creator, DeliveryType, Occasion, Order } from '../types';
 import { OCCASIONS } from '../data/occasions';
@@ -54,7 +54,7 @@ export const BookingFlowModal: React.FC<Props> = ({
   // Checkout State
   const [promoCode, setPromoCode] = useState<string>('');
   const [discount, setDiscount] = useState<number>(0);
-  const [paymentMethod, setPaymentMethod] = useState<string>('Apple Pay');
+  const [paymentMethod, setPaymentMethod] = useState<string>('UPI / Razorpay');
   const [isProcessingPayment, setIsProcessingPayment] = useState<boolean>(false);
   const [completedOrder, setCompletedOrder] = useState<Order | null>(null);
 
@@ -76,7 +76,6 @@ export const BookingFlowModal: React.FC<Props> = ({
   const basePrice = deliveryType === 'video' ? creator.videoPrice : creator.voicePrice;
   const totalPrice = Math.max(0, basePrice - discount);
 
-  // Handle AI Script Generation via server endpoint
   const handleGenerateScript = async () => {
     try {
       setIsGeneratingAi(true);
@@ -115,7 +114,6 @@ export const BookingFlowModal: React.FC<Props> = ({
     }
   };
 
-  // Play AI Audio TTS Preview
   const handlePlayTtsPreview = async () => {
     const textToSpeak = generatedScript || `Hey ${recipientName}, happy ${selectedOccasion.label}!`;
 
@@ -168,21 +166,19 @@ export const BookingFlowModal: React.FC<Props> = ({
     }
   };
 
-  // Apply Promo Code
   const handleApplyPromo = () => {
-    if (promoCode.trim().toUpperCase() === 'ZUNO50' || promoCode.trim().toUpperCase() === 'MIDNIGHT') {
+    if (promoCode.trim().toUpperCase() === 'EVOKE50' || promoCode.trim().toUpperCase() === 'MIDNIGHT') {
       setDiscount(50);
     } else if (promoCode.trim().length > 0) {
       setDiscount(20);
     }
   };
 
-  // Submit Order
   const handleConfirmAndPay = () => {
     setIsProcessingPayment(true);
     setTimeout(() => {
       const newOrder: Order = {
-        id: `ZN-${Math.floor(1000 + Math.random() * 9000)}-X`,
+        id: `EV-${Math.floor(1000 + Math.random() * 9000)}-X`,
         creator,
         deliveryType,
         recipientName,
@@ -216,63 +212,60 @@ export const BookingFlowModal: React.FC<Props> = ({
 
   const renderIcon = (iconName: string) => {
     switch (iconName) {
-      case 'Cake': return <Cake className="w-5 h-5 text-amber-400" />;
-      case 'GraduationCap': return <GraduationCap className="w-5 h-5 text-blue-400" />;
-      case 'Rocket': return <Rocket className="w-5 h-5 text-indigo-400" />;
-      case 'Heart': return <Heart className="w-5 h-5 text-pink-400" />;
-      case 'Sparkles': return <Sparkles className="w-5 h-5 text-purple-400" />;
-      case 'Crown': return <Crown className="w-5 h-5 text-yellow-400" />;
-      case 'Trophy': return <Trophy className="w-5 h-5 text-emerald-400" />;
-      default: return <Gift className="w-5 h-5 text-indigo-400" />;
+      case 'Cake': return <Cake className="w-5 h-5 text-ember-400" />;
+      case 'GraduationCap': return <GraduationCap className="w-5 h-5 text-ember-400" />;
+      case 'Rocket': return <Rocket className="w-5 h-5 text-ember-400" />;
+      case 'Heart': return <Heart className="w-5 h-5 text-ember-400" />;
+      case 'Sparkles': return <Sparkles className="w-5 h-5 text-ember-400" />;
+      case 'Crown': return <Crown className="w-5 h-5 text-ember-400" />;
+      case 'Trophy': return <Trophy className="w-5 h-5 text-ember-400" />;
+      default: return <Gift className="w-5 h-5 text-ember-400" />;
     }
   };
 
+  const stepTitles: Record<number, string> = {
+    1: 'What is the occasion?',
+    2: 'Who are you surprising?',
+    3: 'AI Studio personalization',
+    4: 'Review order & checkout',
+    5: 'Surprise scheduled',
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-slate-950/80 backdrop-blur-2xl">
-      <div className="relative w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl overflow-hidden my-auto text-white">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-night-950/90 backdrop-blur-xl">
+      <div className="relative w-full max-w-2xl bg-night-900 border border-night-800 my-auto text-cream">
         {/* Top Header Bar */}
-        <div className="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-950/60">
+        <div className="px-6 py-5 border-b border-night-800 bg-night-950/60 flex items-center justify-between">
           <div className="flex items-center gap-3">
             {step > 1 && step < 5 && (
               <button
                 onClick={() => setStep((step - 1) as any)}
-                className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300"
+                className="p-2 border border-night-800 hover:border-night-700 text-mist-400 hover:text-cream transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
               </button>
             )}
             <div>
-              <div className="text-xs font-bold text-indigo-400 uppercase tracking-widest">
-                Step {step} of 4 • Booking with {creator.name}
-              </div>
-              <h2 className="text-lg font-bold font-serif text-white">
-                {step === 1 && 'What is the occasion?'}
-                {step === 2 && 'Who are you surprising?'}
-                {step === 3 && 'AI Studio Personalization'}
-                {step === 4 && 'Review Order & Checkout'}
-                {step === 5 && 'Surprise Scheduled! 🎉'}
-              </h2>
+              <div className="operator-label !text-[10px]">Step {Math.min(step, 4)} of 4 · {creator.name}</div>
+              <h2 className="font-display text-lg font-medium text-cream">{stepTitles[step]}</h2>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="p-2.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
+            className="p-2 border border-night-800 hover:border-night-700 text-mist-400 hover:text-cream transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Modal Body Content */}
-        <div className="p-6 max-h-[75vh] overflow-y-auto space-y-6">
+        <div className="p-6 max-h-[75vh] overflow-y-auto space-y-7">
           {/* STEP 1: Occasion & Schedule */}
           {step === 1 && (
-            <div className="space-y-6">
-              {/* Occasion Grid */}
+            <div className="space-y-7">
               <div>
-                <label className="text-xs font-bold text-slate-400 block mb-3 uppercase tracking-wider">
-                  Select Occasion
-                </label>
+                <label className="operator-label !text-[10px] block mb-3">Select occasion</label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {OCCASIONS.map((occ) => {
                     const isSelected = selectedOccasion.id === occ.id;
@@ -283,44 +276,39 @@ export const BookingFlowModal: React.FC<Props> = ({
                           setSelectedOccasion(occ);
                           setCustomInstructions(occ.suggestedPrompt);
                         }}
-                        className={`p-3.5 rounded-2xl border-2 transition-all cursor-pointer flex flex-col items-center text-center gap-2 ${
+                        className={`p-4 border transition-colors cursor-pointer flex flex-col items-center text-center gap-2 ${
                           isSelected
-                            ? 'bg-indigo-950/80 border-indigo-500 text-white shadow-lg shadow-indigo-500/20'
-                            : 'bg-slate-950/60 border-slate-800 hover:border-slate-700 text-slate-300'
+                            ? 'border-ember-500 bg-night-850'
+                            : 'border-night-800 bg-night-950 hover:border-night-700'
                         }`}
                       >
-                        <div className="p-2 rounded-xl bg-slate-900 border border-slate-800">
+                        <div className="p-2 border border-night-800 bg-night-900">
                           {renderIcon(occ.icon)}
                         </div>
-                        <span className="text-xs font-bold">{occ.label}</span>
+                        <span className="text-xs font-semibold text-cream">{occ.label}</span>
                       </div>
                     );
                   })}
                 </div>
               </div>
 
-              {/* Date & Time Picker */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-bold text-slate-400 block mb-2 uppercase tracking-wider">
-                    Delivery Date
-                  </label>
+                  <label className="operator-label !text-[10px] block mb-2">Delivery date</label>
                   <input
                     type="date"
                     value={deliveryDate}
                     onChange={(e) => setDeliveryDate(e.target.value)}
-                    className="w-full px-4 py-3 rounded-2xl bg-slate-950 border border-slate-800 text-white font-medium text-sm focus:outline-none focus:border-indigo-500"
+                    className="w-full px-4 py-3 bg-night-950 border border-night-800 text-cream font-medium text-sm focus:outline-none focus:border-ember-500 transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-400 block mb-2 uppercase tracking-wider">
-                    Delivery Time Target
-                  </label>
+                  <label className="operator-label !text-[10px] block mb-2">Delivery time target</label>
                   <select
                     value={deliveryTime}
                     onChange={(e) => setDeliveryTime(e.target.value)}
-                    className="w-full px-4 py-3 rounded-2xl bg-slate-950 border border-slate-800 text-white font-medium text-sm focus:outline-none focus:border-indigo-500"
+                    className="w-full px-4 py-3 bg-night-950 border border-night-800 text-cream font-medium text-sm focus:outline-none focus:border-ember-500 transition-colors"
                   >
                     <option value="12:00 AM Midnight (Recommended)">12:00 AM Midnight (Recommended)</option>
                     <option value="09:00 AM Morning Blessing">09:00 AM Morning Blessing</option>
@@ -332,39 +320,35 @@ export const BookingFlowModal: React.FC<Props> = ({
 
               <button
                 onClick={() => setStep(2)}
-                className="w-full py-4 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white font-bold text-base shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/40 transition-all flex items-center justify-center gap-2"
+                className="w-full py-4 bg-ember-400 hover:bg-ember-300 text-night-950 font-semibold text-sm transition-colors flex items-center justify-center gap-2"
               >
-                <span>Continue to Recipient Details</span>
-                <ArrowRight className="w-5 h-5" />
+                <span>Continue to recipient details</span>
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           )}
 
           {/* STEP 2: Recipient Details */}
           {step === 2 && (
-            <div className="space-y-5">
+            <div className="space-y-6">
               <div>
-                <label className="text-xs font-bold text-slate-400 block mb-2 uppercase tracking-wider">
-                  Recipient Name *
-                </label>
+                <label className="operator-label !text-[10px] block mb-2">Recipient name *</label>
                 <input
                   type="text"
                   value={recipientName}
                   onChange={(e) => setRecipientName(e.target.value)}
                   placeholder="e.g. Mahesh Kumar"
-                  className="w-full px-4 py-3.5 rounded-2xl bg-slate-950 border border-slate-800 text-white text-sm focus:outline-none focus:border-indigo-500"
+                  className="w-full px-4 py-3.5 bg-night-950 border border-night-800 text-cream text-sm focus:outline-none focus:border-ember-500 transition-colors"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-bold text-slate-400 block mb-2 uppercase tracking-wider">
-                    Relationship
-                  </label>
+                  <label className="operator-label !text-[10px] block mb-2">Relationship</label>
                   <select
                     value={relationship}
                     onChange={(e) => setRelationship(e.target.value)}
-                    className="w-full px-4 py-3.5 rounded-2xl bg-slate-950 border border-slate-800 text-white text-sm focus:outline-none focus:border-indigo-500"
+                    className="w-full px-4 py-3.5 bg-night-950 border border-night-800 text-cream text-sm focus:outline-none focus:border-ember-500 transition-colors"
                   >
                     <option value="Friend">Friend</option>
                     <option value="Brother">Brother</option>
@@ -378,32 +362,28 @@ export const BookingFlowModal: React.FC<Props> = ({
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-400 block mb-2 uppercase tracking-wider">
-                    Recipient Age
-                  </label>
+                  <label className="operator-label !text-[10px] block mb-2">Recipient age</label>
                   <input
                     type="number"
                     value={recipientAge}
                     onChange={(e) => setRecipientAge(e.target.value)}
                     placeholder="e.g. 28"
-                    className="w-full px-4 py-3.5 rounded-2xl bg-slate-950 border border-slate-800 text-white text-sm focus:outline-none focus:border-indigo-500"
+                    className="w-full px-4 py-3.5 bg-night-950 border border-night-800 text-cream text-sm focus:outline-none focus:border-ember-500 transition-colors"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-400 block mb-2 uppercase tracking-wider">
-                  Recipient Mobile Phone Number *
-                </label>
+                <label className="operator-label !text-[10px] block mb-2">Recipient mobile phone *</label>
                 <input
                   type="text"
                   value={recipientMobile}
                   onChange={(e) => setRecipientMobile(e.target.value)}
                   placeholder="+1 (555) 000-0000"
-                  className="w-full px-4 py-3.5 rounded-2xl bg-slate-950 border border-slate-800 text-white text-sm focus:outline-none focus:border-indigo-500"
+                  className="w-full px-4 py-3.5 bg-night-950 border border-night-800 text-cream text-sm focus:outline-none focus:border-ember-500 transition-colors"
                 />
-                <p className="text-[11px] text-slate-500 mt-1">
-                  Required for automated midnight phone call dispatch or SMS gift notification link.
+                <p className="text-[11px] text-mist-500 mt-1.5">
+                  Required for automated midnight call dispatch or SMS gift link.
                 </p>
               </div>
 
@@ -412,30 +392,27 @@ export const BookingFlowModal: React.FC<Props> = ({
                   setStep(3);
                   if (!generatedScript) handleGenerateScript();
                 }}
-                className="w-full py-4 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white font-bold text-base shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/40 transition-all flex items-center justify-center gap-2"
+                className="w-full py-4 bg-ember-400 hover:bg-ember-300 text-night-950 font-semibold text-sm transition-colors flex items-center justify-center gap-2"
               >
-                <span>Continue to Personalize Script</span>
-                <ArrowRight className="w-5 h-5" />
+                <span>Continue to personalize script</span>
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           )}
 
           {/* STEP 3: AI Script Personalization */}
           {step === 3 && (
-            <div className="space-y-6">
-              {/* Instructions Prompt Textarea */}
+            <div className="space-y-7">
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                    Custom Prompt & Memories
-                  </label>
+                  <label className="operator-label !text-[10px]">Custom prompt & memories</label>
                   <button
                     onClick={handleGenerateScript}
                     disabled={isGeneratingAi}
-                    className="text-xs font-bold text-amber-300 hover:text-amber-200 bg-amber-950/80 border border-amber-500/40 px-3 py-1 rounded-full flex items-center gap-1.5 transition-all shadow-md"
+                    className="text-xs font-semibold text-ember-300 hover:text-ember-200 border border-ember-500/40 bg-night-950 px-3 py-1.5 flex items-center gap-1.5 transition-colors"
                   >
-                    <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-spin" style={{ animationDuration: '3s' }} />
-                    <span>{isGeneratingAi ? 'Generating Script...' : '✨ Gemini AI Script Generator'}</span>
+                    <Sparkles className="w-3.5 h-3.5 text-ember-400" />
+                    <span>{isGeneratingAi ? 'Generating script...' : 'Gemini AI script generator'}</span>
                   </button>
                 </div>
 
@@ -444,25 +421,22 @@ export const BookingFlowModal: React.FC<Props> = ({
                   value={customInstructions}
                   onChange={(e) => setCustomInstructions(e.target.value)}
                   placeholder="e.g. Mention that he loves coffee, is turning 30, and always quotes superhero movies..."
-                  className="w-full px-4 py-3 rounded-2xl bg-slate-950 border border-slate-800 text-white text-sm focus:outline-none focus:border-indigo-500"
+                  className="w-full px-4 py-3 bg-night-950 border border-night-800 text-cream text-sm focus:outline-none focus:border-ember-500 transition-colors"
                 />
               </div>
 
-              {/* Chips: Tone & Language */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-bold text-slate-400 block mb-2 uppercase tracking-wider">
-                    Tone
-                  </label>
+                  <label className="operator-label !text-[10px] block mb-2">Tone</label>
                   <div className="flex flex-wrap gap-2">
                     {['Heartfelt', 'Funny & Roast', 'Motivational', 'Emotional'].map((t) => (
                       <button
                         key={t}
                         onClick={() => setTone(t)}
-                        className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+                        className={`px-3 py-1.5 text-xs font-medium border transition-colors ${
                           tone === t
-                            ? 'bg-indigo-600 text-white shadow-md'
-                            : 'bg-slate-950 text-slate-400 hover:text-white border border-slate-800'
+                            ? 'border-ember-500 text-ember-300 bg-night-850'
+                            : 'border-night-800 text-mist-400 hover:text-cream'
                         }`}
                       >
                         {t}
@@ -472,18 +446,16 @@ export const BookingFlowModal: React.FC<Props> = ({
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-400 block mb-2 uppercase tracking-wider">
-                    Language
-                  </label>
+                  <label className="operator-label !text-[10px] block mb-2">Language</label>
                   <div className="flex flex-wrap gap-2">
                     {['English', 'Hindi', 'Spanish', 'French', 'Telugu'].map((l) => (
                       <button
                         key={l}
                         onClick={() => setLanguage(l)}
-                        className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+                        className={`px-3 py-1.5 text-xs font-medium border transition-colors ${
                           language === l
-                            ? 'bg-purple-600 text-white shadow-md'
-                            : 'bg-slate-950 text-slate-400 hover:text-white border border-slate-800'
+                            ? 'border-ember-500 text-ember-300 bg-night-850'
+                            : 'border-night-800 text-mist-400 hover:text-cream'
                         }`}
                       >
                         {l}
@@ -493,41 +465,41 @@ export const BookingFlowModal: React.FC<Props> = ({
                 </div>
               </div>
 
-              {/* Generated Script Preview Box */}
-              <div className="p-4 rounded-2xl bg-gradient-to-r from-indigo-950/60 to-slate-950/80 border border-indigo-500/30 space-y-3">
+              {/* Generated Script Preview */}
+              <div className="border border-ember-500/30 bg-night-950/60 p-4 space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-indigo-300 flex items-center gap-1.5">
-                    <Sparkles className="w-4 h-4 text-amber-400" />
-                    Generated Creator Script
+                  <span className="text-xs font-semibold text-ember-300 flex items-center gap-1.5">
+                    <Sparkles className="w-4 h-4 text-ember-400" />
+                    Generated creator script
                   </span>
 
                   <button
                     onClick={handlePlayTtsPreview}
                     disabled={isTtsLoading}
-                    className="px-3 py-1 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold flex items-center gap-1.5"
+                    className="px-3 py-1.5 bg-ember-400 hover:bg-ember-300 text-night-950 text-xs font-semibold flex items-center gap-1.5 transition-colors"
                   >
                     {isTtsLoading ? (
-                      <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                      <span className="w-3.5 h-3.5 border-2 border-night-950 border-t-transparent rounded-full animate-spin"></span>
                     ) : isPlayingAudio ? (
                       <Pause className="w-3.5 h-3.5" />
                     ) : (
-                      <Play className="w-3.5 h-3.5 fill-white" />
+                      <Play className="w-3.5 h-3.5 fill-night-950" />
                     )}
-                    <span>{isPlayingAudio ? 'Pause' : 'Listen Voice'}</span>
+                    <span>{isPlayingAudio ? 'Pause' : 'Listen voice'}</span>
                   </button>
                 </div>
 
-                <p className="text-xs text-slate-200 italic leading-relaxed font-serif bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+                <p className="text-xs text-mist-300 italic leading-relaxed font-display bg-night-950/80 p-3 border border-night-800">
                   {generatedScript || 'Generating custom script for recipient...'}
                 </p>
               </div>
 
               <button
                 onClick={() => setStep(4)}
-                className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-bold text-base shadow-xl shadow-amber-500/20 hover:shadow-amber-500/40 transition-all flex items-center justify-center gap-2"
+                className="w-full py-4 bg-ember-400 hover:bg-ember-300 text-night-950 font-semibold text-sm transition-colors flex items-center justify-center gap-2"
               >
-                <span>Review Order & Pay (₹{totalPrice})</span>
-                <ArrowRight className="w-5 h-5 text-slate-950" />
+                <span>Review order & pay (₹{totalPrice})</span>
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           )}
@@ -536,97 +508,95 @@ export const BookingFlowModal: React.FC<Props> = ({
           {step === 4 && (
             <div className="space-y-6">
               {/* Creator & Recipient Summary Card */}
-              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 flex items-center gap-4">
+              <div className="p-4 border border-night-800 bg-night-950 flex items-center gap-4">
                 <img
                   src={creator.avatar}
                   alt={creator.name}
-                  className="w-16 h-16 rounded-2xl object-cover ring-2 ring-indigo-500/50"
+                  className="w-16 h-16 border-2 border-night-800 object-cover"
                 />
                 <div className="flex-1">
-                  <h3 className="text-base font-bold text-white">{creator.name}</h3>
-                  <div className="text-xs text-slate-400 flex items-center gap-2 mt-0.5">
+                  <h3 className="font-display text-lg font-medium text-cream">{creator.name}</h3>
+                  <div className="text-xs text-mist-500 flex items-center gap-2 mt-0.5">
                     <span>{deliveryType === 'video' ? '4K Video Message' : 'Voice Note Call'}</span>
-                    <span>•</span>
-                    <span className="text-indigo-400 font-semibold">{selectedOccasion.label}</span>
+                    <span>·</span>
+                    <span className="text-ember-300 font-semibold">{selectedOccasion.label}</span>
                   </div>
-                  <div className="text-[11px] text-slate-400 mt-1">
+                  <div className="text-[11px] text-mist-500 mt-1">
                     Scheduled: {deliveryDate} @ {deliveryTime}
                   </div>
                 </div>
               </div>
 
               {/* Recipient Details Summary */}
-              <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 text-xs space-y-2 text-slate-300">
+              <div className="bg-night-950/60 p-4 border border-night-800 text-xs space-y-2 text-mist-400">
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Recipient Name:</span>
-                  <span className="font-bold text-white">{recipientName} ({relationship})</span>
+                  <span className="text-mist-500">Recipient:</span>
+                  <span className="font-semibold text-cream">{recipientName} ({relationship})</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Recipient Phone:</span>
-                  <span className="font-bold text-white">{recipientMobile}</span>
+                  <span className="text-mist-500">Phone:</span>
+                  <span className="font-semibold text-cream">{recipientMobile}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Tone & Language:</span>
-                  <span className="font-bold text-white">{tone} ({language})</span>
+                  <span className="text-mist-500">Tone & language:</span>
+                  <span className="font-semibold text-cream">{tone} ({language})</span>
                 </div>
               </div>
 
               {/* Promo Code Box */}
               <div className="flex items-center gap-2">
                 <div className="relative flex-1">
-                  <Tag className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                  <Tag className="w-4 h-4 text-mist-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
                   <input
                     type="text"
-                    placeholder="Promo code (e.g. ZUNO50)"
+                    placeholder="Promo code (e.g. EVOKE50)"
                     value={promoCode}
                     onChange={(e) => setPromoCode(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 rounded-2xl bg-slate-950 border border-slate-800 text-white text-xs uppercase focus:outline-none focus:border-indigo-500"
+                    className="w-full pl-10 pr-4 py-3 bg-night-950 border border-night-800 text-cream text-xs uppercase focus:outline-none focus:border-ember-500 transition-colors"
                   />
                 </div>
                 <button
                   onClick={handleApplyPromo}
-                  className="px-4 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold transition-colors"
+                  className="px-4 py-3 bg-night-850 hover:bg-night-800 border border-night-700 text-cream text-xs font-semibold transition-colors"
                 >
                   Apply
                 </button>
               </div>
 
               {/* Price Breakdown */}
-              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2 text-xs">
-                <div className="flex justify-between text-slate-400">
-                  <span>Base Price ({deliveryType}):</span>
-                  <span>₹{basePrice}</span>
+              <div className="p-4 bg-night-950 border border-night-800 space-y-2 text-xs">
+                <div className="flex justify-between text-mist-500">
+                  <span>Base price ({deliveryType}):</span>
+                  <span className="text-cream">₹{basePrice}</span>
                 </div>
-                <div className="flex justify-between text-slate-400">
-                  <span>AI Gemini Script Generator:</span>
-                  <span className="text-emerald-400 font-bold">FREE (₹0)</span>
+                <div className="flex justify-between text-mist-500">
+                  <span>Gemini AI script generator:</span>
+                  <span className="text-ember-300 font-semibold">FREE (₹0)</span>
                 </div>
                 {discount > 0 && (
-                  <div className="flex justify-between text-pink-400 font-semibold">
-                    <span>Discount Code Applied:</span>
-                    <span>-₹{discount}</span>
+                  <div className="flex justify-between text-mist-500 font-semibold">
+                    <span>Discount code applied:</span>
+                    <span className="text-cream">-₹{discount}</span>
                   </div>
                 )}
-                <div className="pt-2 border-t border-slate-800 flex justify-between text-sm font-bold text-white">
-                  <span>Total Amount Due:</span>
-                  <span className="text-indigo-400 text-lg">₹{totalPrice}</span>
+                <div className="pt-2 border-t border-night-800 flex justify-between text-sm font-semibold text-cream">
+                  <span>Total amount due:</span>
+                  <span className="text-ember-300 text-lg font-display">₹{totalPrice}</span>
                 </div>
               </div>
 
               {/* Payment Method Tabs */}
               <div>
-                <label className="text-xs font-bold text-slate-400 block mb-2 uppercase tracking-wider">
-                  Payment Method
-                </label>
+                <label className="operator-label !text-[10px] block mb-2">Payment method</label>
                 <div className="grid grid-cols-3 gap-2">
                   {['UPI / Razorpay', 'Credit Card', 'Netbanking'].map((method) => (
                     <button
                       key={method}
                       onClick={() => setPaymentMethod(method)}
-                      className={`p-3 rounded-xl text-xs font-bold border transition-all ${
+                      className={`p-3 text-xs font-semibold border transition-colors ${
                         paymentMethod === method
-                          ? 'bg-indigo-600 border-indigo-500 text-white shadow-md'
-                          : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-white'
+                          ? 'border-ember-500 bg-night-850 text-ember-300'
+                          : 'border-night-800 bg-night-950 text-mist-400 hover:text-cream'
                       }`}
                     >
                       {method}
@@ -638,17 +608,17 @@ export const BookingFlowModal: React.FC<Props> = ({
               <button
                 onClick={handleConfirmAndPay}
                 disabled={isProcessingPayment}
-                className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-bold text-base shadow-xl shadow-amber-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+                className="w-full py-4 bg-ember-400 hover:bg-ember-300 text-night-950 font-semibold text-sm transition-colors flex items-center justify-center gap-2"
               >
                 {isProcessingPayment ? (
                   <>
-                    <span className="w-5 h-5 border-2 border-slate-950 border-t-transparent rounded-full animate-spin"></span>
-                    <span>Scheduling Midnight Surprise...</span>
+                    <span className="w-5 h-5 border-2 border-night-950 border-t-transparent rounded-full animate-spin"></span>
+                    <span>Scheduling midnight surprise...</span>
                   </>
                 ) : (
                   <>
-                    <ShieldCheck className="w-5 h-5 text-slate-950" />
-                    <span>Confirm & Schedule Surprise (₹{totalPrice})</span>
+                    <ShieldCheck className="w-4 h-4 text-night-950" />
+                    <span>Confirm & schedule surprise (₹{totalPrice})</span>
                   </>
                 )}
               </button>
@@ -660,50 +630,46 @@ export const BookingFlowModal: React.FC<Props> = ({
             <div className="text-center py-6 space-y-6 relative overflow-hidden">
               <CanvasShaderBackground variant="success" />
 
-              <div className="relative z-10 space-y-4">
-                <div className="w-20 h-20 rounded-full bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center mx-auto text-emerald-400 shadow-xl shadow-emerald-500/30 animate-bounce">
-                  <CheckCircle2 className="w-10 h-10" />
+              <div className="relative z-10 space-y-5">
+                <div className="w-16 h-16 rounded-full bg-ember-400/20 border border-ember-400 flex items-center justify-center mx-auto text-ember-300">
+                  <CheckCircle2 className="w-8 h-8" />
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-black font-serif text-white">
-                  Your Surprise is Scheduled!
-                </h3>
-                <p className="text-slate-300 text-sm max-w-md mx-auto">
-                  Order <span className="text-indigo-400 font-mono font-bold">{completedOrder.id}</span> has been assigned to{' '}
-                  <span className="text-white font-bold">{creator.name}</span>.
+                <h3 className="font-display text-3xl font-light text-cream">Your surprise is scheduled</h3>
+                <p className="text-mist-400 text-sm max-w-md mx-auto">
+                  Order <span className="text-ember-300 font-mono font-semibold">{completedOrder.id}</span> has been
+                  assigned to <span className="text-cream font-semibold">{creator.name}</span>.
                 </p>
 
                 {/* Ticking Countdown Box */}
-                <div className="bg-slate-950/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 max-w-md mx-auto space-y-2">
-                  <div className="text-xs text-indigo-400 font-bold uppercase tracking-widest">
-                    Sending In (Midnight Delivery)
-                  </div>
-                  <div className="grid grid-cols-4 gap-2 text-center pt-2">
-                    <div className="p-3 rounded-2xl bg-slate-900 border border-slate-800">
-                      <div className="text-xl font-black text-white">{String(timeRemaining.days).padStart(2, '0')}</div>
-                      <div className="text-[10px] text-slate-400">Days</div>
+                <div className="bg-night-950/80 border border-night-800 p-6 max-w-md mx-auto space-y-3">
+                  <div className="operator-label !text-[10px]">Sending in · Midnight delivery</div>
+                  <div className="grid grid-cols-4 gap-2 text-center pt-1">
+                    <div className="p-3 bg-night-900 border border-night-800">
+                      <div className="text-xl font-semibold text-cream">{String(timeRemaining.days).padStart(2, '0')}</div>
+                      <div className="text-[10px] text-mist-500">Days</div>
                     </div>
-                    <div className="p-3 rounded-2xl bg-slate-900 border border-slate-800">
-                      <div className="text-xl font-black text-white">{String(timeRemaining.hours).padStart(2, '0')}</div>
-                      <div className="text-[10px] text-slate-400">Hours</div>
+                    <div className="p-3 bg-night-900 border border-night-800">
+                      <div className="text-xl font-semibold text-cream">{String(timeRemaining.hours).padStart(2, '0')}</div>
+                      <div className="text-[10px] text-mist-500">Hours</div>
                     </div>
-                    <div className="p-3 rounded-2xl bg-slate-900 border border-slate-800">
-                      <div className="text-xl font-black text-white">{String(timeRemaining.minutes).padStart(2, '0')}</div>
-                      <div className="text-[10px] text-slate-400">Mins</div>
+                    <div className="p-3 bg-night-900 border border-night-800">
+                      <div className="text-xl font-semibold text-cream">{String(timeRemaining.minutes).padStart(2, '0')}</div>
+                      <div className="text-[10px] text-mist-500">Mins</div>
                     </div>
-                    <div className="p-3 rounded-2xl bg-slate-900 border border-slate-800">
-                      <div className="text-xl font-black text-indigo-400 animate-pulse">{String(timeRemaining.seconds).padStart(2, '0')}</div>
-                      <div className="text-[10px] text-slate-400">Secs</div>
+                    <div className="p-3 bg-night-900 border border-night-800">
+                      <div className="text-xl font-semibold text-ember-300">{String(timeRemaining.seconds).padStart(2, '0')}</div>
+                      <div className="text-[10px] text-mist-500">Secs</div>
                     </div>
                   </div>
                 </div>
 
-                <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+                <div className="pt-2">
                   <button
                     onClick={onClose}
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold text-sm shadow-lg shadow-indigo-500/25"
+                    className="px-8 py-3.5 bg-ember-400 hover:bg-ember-300 text-night-950 font-semibold text-sm transition-colors"
                   >
-                    View in My Orders
+                    View in my orders
                   </button>
                 </div>
               </div>

@@ -25,13 +25,16 @@ export const EvokeLogo: React.FC<LogoProps> = ({
         <img
           src={logoSvg}
           alt="EVOKE Logo"
-          className="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(245,158,11,0.4)]"
+          className="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(245,158,11,0.35)]"
         />
       </div>
 
       {showText && (
-        <span className="text-xl md:text-2xl font-normal tracking-[0.22em] bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500 bg-clip-text text-transparent font-serif uppercase select-none">
-          EVOKE
+        <span className="flex items-baseline gap-2">
+          <span className={`font-display font-semibold tracking-wide text-cream uppercase select-none ${size === 'sm' ? 'text-base' : size === 'lg' ? 'text-3xl' : 'text-2xl'}`}>
+            Evoke
+          </span>
+          <span className="w-6 h-px bg-ember-500 hidden sm:inline-block" />
         </span>
       )}
     </div>

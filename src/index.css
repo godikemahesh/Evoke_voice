@@ -1,1 +1,191 @@
 @import "tailwindcss";
+
+/* ============================================================
+   EVOKE — "Midnight Cinema" design tokens
+   Near-black base, candlelight amber accent, editorial serif.
+   ============================================================ */
+
+@theme {
+  /* Neutrals — deep midnight navy, tinted toward violet, never pure black */
+  --color-night-950: oklch(0.14 0.012 300);
+  --color-night-900: oklch(0.17 0.014 300);
+  --color-night-850: oklch(0.21 0.016 300);
+  --color-night-800: oklch(0.26 0.018 300);
+  --color-night-700: oklch(0.33 0.02 300);
+
+  /* Warm near-white for text on night */
+  --color-cream: oklch(0.94 0.02 85);
+  --color-cream-dim: oklch(0.82 0.015 85);
+
+  /* Text greys */
+  --color-mist-400: oklch(0.7 0.02 300);
+  --color-mist-500: oklch(0.58 0.02 300);
+  --color-mist-600: oklch(0.46 0.02 300);
+
+  /* Candlelight amber — the only loud hue */
+  --color-ember-300: oklch(0.86 0.13 75);
+  --color-ember-400: oklch(0.78 0.15 75);
+  --color-ember-500: oklch(0.7 0.16 75);
+  --color-ember-600: oklch(0.55 0.12 75);
+
+  /* Success — reserved for the one legit positive state */
+  --color-aurora-400: oklch(0.79 0.15 160);
+
+  /* Type */
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, monospace;
+
+  /* Tight, deliberate radii */
+  --radius-input: 0.5rem;
+  --radius-card: 0.75rem;
+  --radius-panel: 1rem;
+}
+
+/* ---------- Base ---------- */
+html {
+  background-color: var(--color-night-950);
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-night-950);
+  color: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-ember-400);
+  color: var(--color-night-950);
+}
+
+/* ---------- Utilities ---------- */
+
+/* Monospace operator label — the "console" voice of the brand */
+.operator-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-ember-400);
+}
+
+/* Film grain overlay */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Letterbox crop bars */
+.letterbox::before,
+.letterbox::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: clamp(24px, 5vh, 56px);
+  background: var(--color-night-950);
+  z-index: 40;
+  pointer-events: none;
+}
+.letterbox::before {
+  top: 0;
+}
+.letterbox::after {
+  bottom: 0;
+}
+
+/* Oversized editorial index numerals */
+.index-numeral {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1;
+  font-size: clamp(4rem, 10vw, 9rem);
+  color: transparent;
+  -webkit-text-stroke: 1px oklch(0.4 0.03 300);
+}
+
+/* Focus ring — visible, consistent, ember */
+:where(a, button, input, select, textarea, [role="button"]):focus-visible {
+  outline: 2px solid var(--color-ember-400);
+  outline-offset: 3px;
+  border-radius: var(--radius-input);
+}
+
+/* ---------- Motion ---------- */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes ember-breathe {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.reveal {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.reveal-delay-1 {
+  animation-delay: 0.15s;
+}
+.reveal-delay-2 {
+  animation-delay: 0.3s;
+}
+.reveal-delay-3 {
+  animation-delay: 0.45s;
+}
+
+.ember-breathe {
+  animation: ember-breathe 3.5s ease-in-out infinite;
+}
+
+.ticker-track {
+  animation: ticker 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

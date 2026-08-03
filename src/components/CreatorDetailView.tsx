@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Star, Video, Phone, ShieldCheck, Clock, Sparkles, Volume2, Play, Pause, CheckCircle } from 'lucide-react';
+import { ArrowLeft, Star, Video, Phone, ShieldCheck, Clock, Volume2, Play, Pause, Sparkles } from 'lucide-react';
 import { Creator, DeliveryType } from '../types';
 
 interface Props {
@@ -48,7 +48,6 @@ export const CreatorDetailView: React.FC<Props> = ({ creator, onBack, onProceed 
         audio.play();
         audio.onended = () => setIsPlayingAudio(false);
       } else {
-        // Fallback simulated speech synth if server key not present
         const synth = window.speechSynthesis;
         if (synth) {
           const utterance = new SpeechSynthesisUtterance(creator.audioSampleText);
@@ -74,20 +73,20 @@ export const CreatorDetailView: React.FC<Props> = ({ creator, onBack, onProceed 
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white pt-6 pb-24">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+    <div className="min-h-screen bg-night-950 text-cream pt-6 pb-28">
+      <div className="max-w-5xl mx-auto px-5 sm:px-8">
         {/* Top Navigation */}
         <button
           onClick={onBack}
-          className="inline-flex items-center gap-2 text-slate-400 hover:text-white mb-6 text-sm font-medium transition-colors"
+          className="inline-flex items-center gap-2 text-mist-500 hover:text-ember-300 mb-6 text-sm font-medium transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Discover</span>
         </button>
 
         {/* Cover & Avatar Header */}
-        <div className="relative rounded-3xl overflow-hidden bg-slate-900 border border-slate-800 shadow-2xl mb-8">
-          <div className="h-56 sm:h-72 w-full relative">
+        <div className="relative border border-night-800 bg-night-900 mb-10 overflow-hidden">
+          <div className="h-56 sm:h-80 w-full relative">
             <img
               src={creator.coverImage}
               alt={creator.name}
@@ -97,13 +96,13 @@ export const CreatorDetailView: React.FC<Props> = ({ creator, onBack, onProceed 
               }}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-night-950 via-night-950/40 to-night-950/20" />
           </div>
 
-          <div className="p-6 sm:p-8 relative -mt-20 z-10">
+          <div className="p-6 sm:p-8 relative -mt-16 z-10">
             <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6">
               <div className="flex items-end gap-5">
-                <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-3xl border-4 border-slate-950 overflow-hidden shadow-2xl bg-slate-900 flex-shrink-0">
+                <div className="w-24 h-24 sm:w-32 sm:h-32 border-4 border-night-950 overflow-hidden bg-night-900 flex-shrink-0">
                   <img
                     src={creator.avatar}
                     alt={creator.name}
@@ -115,30 +114,25 @@ export const CreatorDetailView: React.FC<Props> = ({ creator, onBack, onProceed 
                   />
                 </div>
                 <div>
-                  <div className="flex items-center gap-2 mb-1 flex-wrap">
-                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-950/90 border border-emerald-500/60 text-[11px] font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1 shadow-md">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                      Coming Soon
-                    </span>
-                    <span className="px-2.5 py-0.5 rounded-full bg-indigo-950/80 border border-indigo-500/40 text-[11px] font-bold text-indigo-300 uppercase tracking-wider">
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    <span className="px-2 py-0.5 border border-ember-500/50 text-[10px] font-mono tracking-widest text-ember-300 uppercase">
                       {creator.category}
                     </span>
-                    <span className="px-2.5 py-0.5 rounded-full bg-slate-800/80 border border-slate-700 text-[11px] font-bold text-slate-300 flex items-center gap-1">
-                      <CheckCircle className="w-3 h-3 text-indigo-400" />
-                      Verified Celeb
+                    <span className="px-2 py-0.5 border border-night-700 text-[10px] font-mono tracking-widest text-mist-500 uppercase">
+                      Verified
                     </span>
                   </div>
-                  <h1 className="text-2xl sm:text-4xl font-black text-white font-serif">{creator.name}</h1>
-                  <p className="text-slate-300 text-sm font-medium mt-0.5">{creator.tagline}</p>
+                  <h1 className="font-display text-4xl sm:text-5xl font-light text-cream">{creator.name}</h1>
+                  <p className="text-mist-400 text-sm font-medium mt-1">{creator.tagline}</p>
                 </div>
               </div>
 
               {/* Rating Box */}
-              <div className="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl flex items-center gap-3 backdrop-blur-md">
-                <Star className="w-8 h-8 text-amber-400 fill-amber-400" />
+              <div className="bg-night-900 border border-night-800 px-5 py-4 flex items-center gap-3">
+                <Star className="w-7 h-7 text-ember-400 fill-ember-400" />
                 <div>
-                  <div className="text-xl font-bold text-white">{creator.rating} / 5.0</div>
-                  <div className="text-xs text-slate-400">{creator.reviewsCount} Fan Reviews</div>
+                  <div className="text-xl font-semibold text-cream">{creator.rating} / 5.0</div>
+                  <div className="text-xs text-mist-500">{creator.reviewsCount} fan reviews</div>
                 </div>
               </div>
             </div>
@@ -148,17 +142,17 @@ export const CreatorDetailView: React.FC<Props> = ({ creator, onBack, onProceed 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Info */}
           <div className="lg:col-span-2 space-y-8">
-            {/* About Section */}
-            <div className="bg-slate-900/80 rounded-3xl p-6 border border-slate-800 space-y-4">
-              <h2 className="text-xl font-bold text-white font-serif">About Creator</h2>
-              <p className="text-slate-300 text-sm leading-relaxed">{creator.bio}</p>
+            {/* About */}
+            <div className="border border-night-800 bg-night-900/40 p-6 sm:p-8 space-y-4">
+              <div className="operator-label mb-1">About</div>
+              <p className="text-mist-400 text-sm leading-relaxed">{creator.bio}</p>
 
-              <div className="pt-4 border-t border-slate-800 flex flex-wrap gap-2">
-                <span className="text-xs text-slate-400 mr-2 font-medium self-center">Languages:</span>
+              <div className="pt-4 border-t border-night-800 flex flex-wrap items-center gap-2">
+                <span className="text-xs text-mist-500 mr-2 font-medium">Languages:</span>
                 {creator.languages.map((lang) => (
                   <span
                     key={lang}
-                    className="px-3 py-1 rounded-full bg-slate-800 text-xs font-semibold text-slate-200"
+                    className="px-2.5 py-1 border border-night-800 text-xs font-medium text-mist-300"
                   >
                     {lang}
                   </span>
@@ -166,129 +160,121 @@ export const CreatorDetailView: React.FC<Props> = ({ creator, onBack, onProceed 
               </div>
             </div>
 
-            {/* Audio Voice Preview */}
+            {/* Voice Preview */}
             {creator.audioSampleText && (
-              <div className="bg-gradient-to-r from-indigo-950/60 to-purple-950/60 rounded-3xl p-6 border border-indigo-500/30 space-y-4">
+              <div className="border border-ember-500/30 bg-night-900/40 p-6 sm:p-8 space-y-5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-indigo-600 flex items-center justify-center text-white">
+                    <div className="w-10 h-10 bg-ember-400/10 border border-ember-500/40 flex items-center justify-center text-ember-400">
                       <Volume2 className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="text-base font-bold text-white">Voice Sample</h3>
-                      <p className="text-xs text-indigo-300">Listen to AI voice tone & timbre</p>
+                      <div className="operator-label !text-[10px]">Voice sample</div>
+                      <p className="text-xs text-mist-400 mt-0.5">AI voice tone and timbre</p>
                     </div>
                   </div>
 
                   <button
                     onClick={handlePlaySample}
                     disabled={audioTtsLoading}
-                    className="px-4 py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-semibold text-sm flex items-center gap-2 shadow-lg shadow-indigo-500/20 transition-all"
+                    className="px-4 py-2.5 bg-ember-400 hover:bg-ember-300 disabled:opacity-50 text-night-950 font-semibold text-sm flex items-center gap-2 transition-colors"
                   >
                     {audioTtsLoading ? (
-                      <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                      <span className="w-4 h-4 border-2 border-night-950 border-t-transparent rounded-full animate-spin"></span>
                     ) : isPlayingAudio ? (
                       <Pause className="w-4 h-4" />
                     ) : (
-                      <Play className="w-4 h-4 fill-white" />
+                      <Play className="w-4 h-4 fill-night-950" />
                     )}
-                    <span>{isPlayingAudio ? 'Pause Voice' : 'Listen Sample'}</span>
+                    <span>{isPlayingAudio ? 'Pause voice' : 'Listen sample'}</span>
                   </button>
                 </div>
 
-                <div className="bg-slate-950/60 p-4 rounded-2xl border border-indigo-900/50">
-                  <p className="text-sm italic text-indigo-200 font-serif">
-                    &quot;{creator.audioSampleText}&quot;
-                  </p>
-                </div>
+                <p className="text-sm italic text-mist-300 font-display leading-relaxed">
+                  "{creator.audioSampleText}"
+                </p>
               </div>
             )}
 
             {/* Guarantees */}
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-center gap-3">
-                <Clock className="w-6 h-6 text-indigo-400 flex-shrink-0" />
+              <div className="p-4 border border-night-800 bg-night-900/40 flex items-center gap-3">
+                <Clock className="w-5 h-5 text-ember-400 flex-shrink-0" strokeWidth={1.5} />
                 <div>
-                  <div className="text-xs font-bold text-white">24h Express Option</div>
-                  <div className="text-[11px] text-slate-400">Guaranteed delivery within 24 hours</div>
+                  <div className="text-xs font-semibold text-cream">24h express option</div>
+                  <div className="text-[11px] text-mist-500">Guaranteed delivery within 24 hours</div>
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-center gap-3">
-                <ShieldCheck className="w-6 h-6 text-emerald-400 flex-shrink-0" />
+              <div className="p-4 border border-night-800 bg-night-900/40 flex items-center gap-3">
+                <ShieldCheck className="w-5 h-5 text-ember-400 flex-shrink-0" strokeWidth={1.5} />
                 <div>
-                  <div className="text-xs font-bold text-white">100% Refund Guarantee</div>
-                  <div className="text-[11px] text-slate-400">Full refund if not delivered on time</div>
+                  <div className="text-xs font-semibold text-cream">100% refund guarantee</div>
+                  <div className="text-[11px] text-mist-500">Full refund if not delivered on time</div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Booking Selection Panel */}
+          {/* Right Booking Panel */}
           <div className="space-y-6">
-            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-6 sticky top-24 shadow-2xl">
-              <h3 className="text-lg font-bold text-white font-serif">Select Surprise Format</h3>
+            <div className="border border-night-800 bg-night-900 p-6 space-y-6 sticky top-20">
+              <h3 className="font-display text-xl font-medium text-cream">Select surprise format</h3>
 
-              {/* Delivery Type Cards */}
               <div className="space-y-3">
                 <div
                   onClick={() => setSelectedType('video')}
-                  className={`p-4 rounded-2xl border-2 transition-all cursor-pointer flex items-center justify-between ${
+                  className={`p-4 border transition-colors cursor-pointer flex items-center justify-between ${
                     selectedType === 'video'
-                      ? 'bg-amber-950/40 border-amber-500 text-white shadow-lg shadow-amber-500/10'
-                      : 'bg-slate-950/60 border-slate-800 hover:border-slate-700 text-slate-300'
+                      ? 'border-ember-500 bg-night-850'
+                      : 'border-night-800 bg-night-950 hover:border-night-700'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="p-2.5 rounded-xl bg-amber-500/20 text-amber-400">
+                    <div className="p-2.5 bg-ember-400/10 border border-ember-500/30 text-ember-400">
                       <Video className="w-5 h-5" />
                     </div>
                     <div>
-                      <div className="text-sm font-bold">4K Video Message</div>
-                      <div className="text-xs text-slate-400">60s HD video recorded exclusively for recipient</div>
+                      <div className="text-sm font-semibold text-cream">4K Video Message</div>
+                      <div className="text-xs text-mist-500">60s HD video for the recipient</div>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <div className="text-lg font-black text-amber-300">₹{creator.videoPrice}</div>
-                  </div>
+                  <div className="text-lg font-semibold text-ember-300">₹{creator.videoPrice}</div>
                 </div>
 
                 <div
                   onClick={() => setSelectedType('voice')}
-                  className={`p-4 rounded-2xl border-2 transition-all cursor-pointer flex items-center justify-between ${
+                  className={`p-4 border transition-colors cursor-pointer flex items-center justify-between ${
                     selectedType === 'voice'
-                      ? 'bg-amber-950/40 border-amber-500 text-white shadow-lg shadow-amber-500/10'
-                      : 'bg-slate-950/60 border-slate-800 hover:border-slate-700 text-slate-300'
+                      ? 'border-ember-500 bg-night-850'
+                      : 'border-night-800 bg-night-950 hover:border-night-700'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="p-2.5 rounded-xl bg-amber-500/20 text-amber-400">
+                    <div className="p-2.5 bg-ember-400/10 border border-ember-500/30 text-ember-400">
                       <Phone className="w-5 h-5" />
                     </div>
                     <div>
-                      <div className="text-sm font-bold">Voice Call / Note</div>
-                      <div className="text-xs text-slate-400">Direct phone call or high quality voice audio note</div>
+                      <div className="text-sm font-semibold text-cream">Voice Call / Note</div>
+                      <div className="text-xs text-mist-500">Direct call or high quality audio note</div>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <div className="text-lg font-black text-amber-300">₹{creator.voicePrice}</div>
-                  </div>
+                  <div className="text-lg font-semibold text-ember-300">₹{creator.voicePrice}</div>
                 </div>
               </div>
 
-              {/* Total & Checkout CTA */}
-              <div className="pt-4 border-t border-slate-800 space-y-4">
+              <div className="pt-4 border-t border-night-800 space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-slate-400 text-sm">Total Price:</span>
-                  <span className="text-2xl font-black text-amber-400">₹{price}</span>
+                  <span className="text-mist-500 text-sm">Total price</span>
+                  <span className="font-display text-2xl font-normal text-ember-300">₹{price}</span>
                 </div>
 
                 <button
                   onClick={() => onProceed(creator, selectedType)}
-                  className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-bold text-base shadow-xl shadow-amber-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+                  className="w-full py-4 bg-ember-400 hover:bg-ember-300 text-night-950 font-semibold text-sm transition-colors flex items-center justify-center gap-2"
                 >
-                  <Sparkles className="w-5 h-5 text-slate-950" />
-                  <span>Personalize Surprise</span>
+                  <Sparkles className="w-4 h-4 text-night-950" />
+                  <span>Personalize surprise</span>
                 </button>
               </div>
             </div>

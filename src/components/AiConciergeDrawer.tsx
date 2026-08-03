@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Send, X, User as UserIcon, ArrowRight } from 'lucide-react';
+import { Sparkles, Send, X } from 'lucide-react';
 import { Creator } from '../types';
 import { EvokeLogo } from './EvokeLogo';
 
@@ -68,26 +68,26 @@ export const AiConciergeDrawer: React.FC<Props> = ({
   };
 
   return (
-    <div className="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-slate-900 border-l border-slate-800 shadow-2xl flex flex-col text-white backdrop-blur-2xl">
+    <div className="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-night-900 border-l border-night-800 flex flex-col text-cream backdrop-blur-xl">
       {/* Header */}
-      <div className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/80">
+      <div className="p-4 border-b border-night-800 flex items-center justify-between bg-night-950/80">
         <div className="flex items-center gap-3">
-          <div className="p-1 rounded-xl bg-slate-950 border border-amber-500/40 shadow-md shadow-amber-500/20">
+          <div className="p-1 border border-ember-500/40 bg-night-950">
             <EvokeLogo showText={false} size="sm" />
           </div>
           <div>
-            <h3 className="text-sm font-bold text-white flex items-center gap-1.5">
+            <h3 className="text-sm font-semibold text-cream flex items-center gap-1.5">
               <span>Evoke AI Studio Concierge</span>
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <Sparkles className="w-3.5 h-3.5 text-ember-400" />
             </h3>
-            <p className="text-[10px] text-amber-300/80">Powered by Gemini 3.6 Flash</p>
+            <p className="text-[10px] text-ember-300/80 font-mono tracking-wider uppercase">Powered by Gemini 3.6 Flash</p>
           </div>
         </div>
 
         <button
           type="button"
           onClick={onClose}
-          className="p-2 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white cursor-pointer transition-colors"
+          className="p-2 border border-night-800 hover:border-night-700 text-mist-400 hover:text-cream transition-colors"
           aria-label="Close AI Studio Concierge"
         >
           <X className="w-5 h-5" />
@@ -102,15 +102,15 @@ export const AiConciergeDrawer: React.FC<Props> = ({
             className={`flex gap-3 ${m.sender === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             {m.sender === 'ai' && (
-              <div className="w-8 h-8 rounded-full bg-slate-950 border border-amber-500/50 p-1 flex items-center justify-center flex-shrink-0 shadow-md shadow-amber-500/20">
+              <div className="w-8 h-8 bg-night-950 border border-ember-500/50 p-1 flex items-center justify-center flex-shrink-0">
                 <EvokeLogo showText={false} size="sm" />
               </div>
             )}
             <div
-              className={`p-3.5 rounded-2xl max-w-[80%] leading-relaxed ${
+              className={`p-3.5 max-w-[80%] leading-relaxed ${
                 m.sender === 'user'
-                  ? 'bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-medium rounded-br-none'
-                  : 'bg-slate-950 border border-slate-800 text-slate-200 rounded-bl-none'
+                  ? 'bg-ember-400 text-night-950 font-medium'
+                  : 'bg-night-950 border border-night-800 text-mist-300'
               }`}
             >
               {m.text}
@@ -118,7 +118,7 @@ export const AiConciergeDrawer: React.FC<Props> = ({
           </div>
         ))}
         {isLoading && (
-          <div className="flex items-center gap-2 text-amber-400 text-xs italic">
+          <div className="flex items-center gap-2 text-ember-400 text-xs italic">
             <Sparkles className="w-4 h-4 animate-spin" />
             <span>AI Concierge thinking...</span>
           </div>
@@ -126,19 +126,19 @@ export const AiConciergeDrawer: React.FC<Props> = ({
       </div>
 
       {/* Input Field */}
-      <div className="p-4 border-t border-slate-800 bg-slate-950/80 flex items-center gap-2">
+      <div className="p-4 border-t border-night-800 bg-night-950/80 flex items-center gap-2">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSend()}
           placeholder="Describe recipient & budget..."
-          className="flex-1 px-4 py-3 rounded-2xl bg-slate-900 border border-slate-800 text-xs text-white focus:outline-none focus:border-amber-500 font-sans"
+          className="flex-1 px-4 py-3 bg-night-900 border border-night-800 text-xs text-cream placeholder-mist-600 focus:outline-none focus:border-ember-500 transition-colors"
         />
         <button
           onClick={handleSend}
           disabled={isLoading}
-          className="p-3 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 hover:scale-105 transition-all shadow-md shadow-amber-500/20 font-bold"
+          className="p-3 bg-ember-400 hover:bg-ember-300 text-night-950 transition-colors"
         >
           <Send className="w-4 h-4" />
         </button>
@@ -146,4 +146,3 @@ export const AiConciergeDrawer: React.FC<Props> = ({
     </div>
   );
 };
-

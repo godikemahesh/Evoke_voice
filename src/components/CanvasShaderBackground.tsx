@@ -27,18 +27,18 @@ export const CanvasShaderBackground: React.FC<Props> = ({ variant = 'cosmic', cl
 
     window.addEventListener('resize', handleResize);
 
-    // Particle system
-    const particleCount = variant === 'success' ? 60 : 40;
+    // Particle system — candlelight embers and soft aurora
+    const particleCount = variant === 'success' ? 70 : 45;
     const particles = Array.from({ length: particleCount }).map(() => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      radius: Math.random() * (variant === 'success' ? 3 : 2) + 0.5,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4 - (variant === 'success' ? 0.3 : 0.1),
-      alpha: Math.random() * 0.6 + 0.2,
+      radius: Math.random() * (variant === 'success' ? 2.5 : 1.8) + 0.4,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3 - (variant === 'success' ? 0.25 : 0.08),
+      alpha: Math.random() * 0.5 + 0.15,
       color: variant === 'success'
-        ? ['#ec4899', '#a855f7', '#3b82f6', '#10b981', '#f59e0b'][Math.floor(Math.random() * 5)]
-        : ['#6366f1', '#a855f7', '#ec4899', '#818cf8'][Math.floor(Math.random() * 4)],
+        ? ['#fbbf24', '#f59e0b', '#34d399', '#fcd34d', '#10b981'][Math.floor(Math.random() * 5)]
+        : ['#f59e0b', '#d97706', '#fcd34d', '#b45309'][Math.floor(Math.random() * 4)],
     }));
 
     let time = 0;
@@ -46,36 +46,36 @@ export const CanvasShaderBackground: React.FC<Props> = ({ variant = 'cosmic', cl
     const render = () => {
       time += 0.01;
 
-      // Clear with dark atmospheric gradient
+      // Clear with dark midnight gradient
       const bgGrad = ctx.createLinearGradient(0, 0, width, height);
       if (variant === 'success') {
-        bgGrad.addColorStop(0, '#0a0518');
-        bgGrad.addColorStop(0.5, '#130c2c');
-        bgGrad.addColorStop(1, '#05020a');
+        bgGrad.addColorStop(0, '#0b0a08');
+        bgGrad.addColorStop(0.5, '#14110c');
+        bgGrad.addColorStop(1, '#050404');
       } else {
-        bgGrad.addColorStop(0, '#070611');
-        bgGrad.addColorStop(0.5, '#0f0a21');
-        bgGrad.addColorStop(1, '#05040a');
+        bgGrad.addColorStop(0, '#07060a');
+        bgGrad.addColorStop(0.5, '#0e0b14');
+        bgGrad.addColorStop(1, '#040308');
       }
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, width, height);
 
-      // Glowing dynamic orb 1
-      const orb1X = width * 0.3 + Math.sin(time * 0.8) * 60;
-      const orb1Y = height * 0.4 + Math.cos(time * 0.6) * 40;
+      // Glowing dynamic orb 1 — warm candlelight
+      const orb1X = width * 0.32 + Math.sin(time * 0.8) * 60;
+      const orb1Y = height * 0.42 + Math.cos(time * 0.6) * 40;
       const orb1Grad = ctx.createRadialGradient(orb1X, orb1Y, 0, orb1X, orb1Y, width * 0.4);
-      orb1Grad.addColorStop(0, variant === 'success' ? 'rgba(236, 72, 153, 0.25)' : 'rgba(99, 102, 241, 0.2)');
+      orb1Grad.addColorStop(0, variant === 'success' ? 'rgba(245, 158, 11, 0.18)' : 'rgba(217, 119, 6, 0.14)');
       orb1Grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
       ctx.fillStyle = orb1Grad;
       ctx.beginPath();
       ctx.arc(orb1X, orb1Y, width * 0.4, 0, Math.PI * 2);
       ctx.fill();
 
-      // Glowing dynamic orb 2
+      // Glowing dynamic orb 2 — faint violet depth
       const orb2X = width * 0.7 + Math.cos(time * 0.7) * 70;
       const orb2Y = height * 0.6 + Math.sin(time * 0.9) * 50;
       const orb2Grad = ctx.createRadialGradient(orb2X, orb2Y, 0, orb2X, orb2Y, width * 0.45);
-      orb2Grad.addColorStop(0, variant === 'success' ? 'rgba(168, 85, 247, 0.25)' : 'rgba(168, 85, 247, 0.18)');
+      orb2Grad.addColorStop(0, variant === 'success' ? 'rgba(252, 211, 77, 0.16)' : 'rgba(88, 61, 158, 0.1)');
       orb2Grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
       ctx.fillStyle = orb2Grad;
       ctx.beginPath();

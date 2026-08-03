@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Search, Mic, Sparkles, SlidersHorizontal, Flame, Star, CheckCircle } from 'lucide-react';
+import { Search, Mic, Sparkles } from 'lucide-react';
 import { Creator, User } from '../types';
 import { CATEGORIES } from '../data/mockCreators';
 import { CreatorCard } from './CreatorCard';
@@ -21,7 +21,6 @@ export const DiscoverView: React.FC<Props> = ({
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isListeningMic, setIsListeningMic] = useState<boolean>(false);
 
-  // Filtered Creators
   const filteredCreators = useMemo(() => {
     return creators.filter((c) => {
       const matchesCategory = selectedCategory === 'All' || c.category === selectedCategory;
@@ -37,7 +36,6 @@ export const DiscoverView: React.FC<Props> = ({
   const trendingCreators = useMemo(() => creators.filter((c) => c.trending), [creators]);
   const recommendedCreators = useMemo(() => creators.filter((c) => c.recommended), [creators]);
 
-  // Handle Speech Mic Search
   const handleMicClick = () => {
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -56,46 +54,49 @@ export const DiscoverView: React.FC<Props> = ({
     }
   };
 
+  const firstName = user?.name ? user.name.split(' ')[0] : 'Mahesh';
+
   return (
-    <div className="min-h-screen bg-slate-950 text-white pt-6 pb-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+    <div className="min-h-screen bg-night-950 text-cream pt-10 pb-28">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 space-y-12">
         {/* Top Greeting Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <h1 className="text-3xl sm:text-4xl font-black font-serif text-white">
-              Good Evening, {user?.name ? user.name.split(' ')[0] : 'Mahesh'} 👋
+            <div className="operator-label mb-2">Evoke · Discover</div>
+            <h1 className="font-display text-4xl sm:text-5xl font-light text-cream">
+              Good evening, <span className="italic text-ember-300">{firstName}</span>
             </h1>
-            <p className="text-slate-400 text-sm mt-1">
-              Who would you like to request a midnight surprise call from today?
+            <p className="text-mist-500 text-sm mt-2">
+              Who would you like to surprise at midnight tonight?
             </p>
           </div>
 
           <button
             onClick={onOpenAiConcierge}
-            className="px-5 py-3 rounded-2xl bg-gradient-to-r from-indigo-950 via-purple-950 to-pink-950 border border-indigo-500/40 text-indigo-300 font-bold text-xs shadow-xl shadow-indigo-500/10 hover:border-indigo-500/70 hover:scale-105 transition-all flex items-center gap-2 self-start md:self-auto"
+            className="inline-flex items-center gap-2 self-start md:self-auto px-5 py-3 bg-night-900 border border-night-800 hover:border-ember-500/50 text-cream text-xs font-medium transition-colors"
           >
-            <Sparkles className="w-4 h-4 text-amber-400 animate-spin" style={{ animationDuration: '4s' }} />
-            <span>AI Studio Concierge Helper</span>
+            <Sparkles className="w-4 h-4 text-ember-400" />
+            <span>Ask the AI Studio Concierge</span>
           </button>
         </div>
 
         {/* Search Bar & Voice Input */}
-        <div className="relative max-w-3xl mx-auto">
+        <div className="relative max-w-3xl">
           <div className="relative flex items-center">
-            <Search className="w-5 h-5 text-slate-400 absolute left-4 pointer-events-none" />
+            <Search className="w-4 h-4 text-mist-500 absolute left-4 pointer-events-none" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by celebrity name, actor, singer, or occasion..."
-              className="w-full pl-12 pr-14 py-4 rounded-2xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 shadow-xl"
+              placeholder="Search by name, actor, singer, or occasion..."
+              className="w-full pl-11 pr-14 py-3.5 bg-night-900 border border-night-800 text-cream placeholder-mist-600 text-sm focus:outline-none focus:border-ember-500 transition-colors"
             />
             <button
               onClick={handleMicClick}
-              className={`absolute right-3.5 p-2 rounded-xl border transition-all ${
+              className={`absolute right-3 p-2 border transition-colors ${
                 isListeningMic
-                  ? 'bg-rose-600 text-white border-rose-500 animate-pulse'
-                  : 'bg-slate-800 text-slate-400 hover:text-white border-slate-700'
+                  ? 'bg-ember-500 text-night-950 border-ember-500'
+                  : 'bg-night-800 text-mist-400 hover:text-cream border-night-700'
               }`}
               title="Speak to Search"
             >
@@ -105,15 +106,15 @@ export const DiscoverView: React.FC<Props> = ({
         </div>
 
         {/* Categories Bar */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+        <div className="flex items-center gap-6 overflow-x-auto pb-2 scrollbar-none border-b border-night-800">
           {CATEGORIES.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap transition-all ${
+              className={`relative pb-2 text-xs font-medium whitespace-nowrap transition-colors ${
                 selectedCategory === cat
-                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/20 scale-105'
-                  : 'bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800'
+                  ? 'text-ember-300 after:absolute after:left-0 after:right-0 after:bottom-0 after:h-px after:bg-ember-400'
+                  : 'text-mist-500 hover:text-cream'
               }`}
             >
               {cat}
@@ -125,11 +126,11 @@ export const DiscoverView: React.FC<Props> = ({
         {searchQuery.trim() !== '' || selectedCategory !== 'All' ? (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-bold text-white font-serif">
+              <h2 className="font-display text-2xl font-normal text-cream">
                 Results ({filteredCreators.length})
               </h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
               {filteredCreators.map((creator) => (
                 <CreatorCard key={creator.id} creator={creator} onSelect={onSelectCreator} />
               ))}
@@ -137,20 +138,15 @@ export const DiscoverView: React.FC<Props> = ({
           </div>
         ) : (
           /* Default Discover View: Trending & Recommended */
-          <div className="space-y-12">
+          <div className="space-y-14">
             {/* Trending Now */}
-            <div className="space-y-6">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-xl bg-amber-500/20 text-amber-400">
-                  <Flame className="w-5 h-5 fill-amber-400" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-white font-serif">Trending Now</h2>
-                  <p className="text-xs text-slate-400">Most requested celebrities for midnight surprises</p>
-                </div>
+            <div className="space-y-8">
+              <div className="flex items-baseline justify-between">
+                <h2 className="font-display text-3xl font-light text-cream">Trending now</h2>
+                <span className="operator-label hidden sm:block">Most requested</span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 {trendingCreators.map((creator) => (
                   <CreatorCard key={creator.id} creator={creator} onSelect={onSelectCreator} />
                 ))}
@@ -158,18 +154,13 @@ export const DiscoverView: React.FC<Props> = ({
             </div>
 
             {/* Recommended for You */}
-            <div className="space-y-6">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-xl bg-purple-500/20 text-purple-400">
-                  <Sparkles className="w-5 h-5" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-white font-serif">Recommended for You</h2>
-                  <p className="text-xs text-slate-400">Handpicked creators matched for birthdays & anniversaries</p>
-                </div>
+            <div className="space-y-8">
+              <div className="flex items-baseline justify-between">
+                <h2 className="font-display text-3xl font-light text-cream">Recommended for you</h2>
+                <span className="operator-label hidden sm:block">Handpicked</span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 {recommendedCreators.map((creator) => (
                   <CreatorCard key={creator.id} creator={creator} onSelect={onSelectCreator} />
                 ))}

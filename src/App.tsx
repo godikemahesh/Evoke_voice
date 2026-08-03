@@ -178,7 +178,7 @@ export default function App() {
   ).length;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white font-sans antialiased selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-night-950 text-cream font-sans antialiased selection:bg-ember-400 selection:text-night-950">
       {/* Global Navigation Bar */}
       <Navbar
         activeTab={activeTab}

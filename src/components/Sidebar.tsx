@@ -1,5 +1,5 @@
 import React from 'react';
-import { Compass, Calendar, Clock, Sparkles, Settings, Gift, Home, ShieldCheck } from 'lucide-react';
+import { Compass, Calendar, Sparkles, Settings } from 'lucide-react';
 import { ActiveTab } from '../types';
 
 interface Props {
@@ -23,7 +23,7 @@ export const Sidebar: React.FC<Props> = ({ activeTab, setActiveTab, upcomingCoun
   return (
     <>
       {/* Mobile Bottom App Bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-slate-950/90 backdrop-blur-xl border-t border-slate-800/80 px-4 py-2">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-night-950/92 backdrop-blur-xl border-t border-night-800/80 px-4 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
         <div className="flex items-center justify-around">
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -32,19 +32,20 @@ export const Sidebar: React.FC<Props> = ({ activeTab, setActiveTab, upcomingCoun
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`flex flex-col items-center gap-1 py-1 px-3 rounded-xl transition-all relative ${
-                  isActive ? 'text-indigo-400 font-semibold scale-105' : 'text-slate-400 hover:text-slate-200'
+                className={`flex flex-col items-center gap-1 py-1 px-3 transition-colors relative ${
+                  isActive ? 'text-ember-300' : 'text-mist-500 hover:text-cream'
                 }`}
               >
                 <div className="relative">
-                  <Icon className="w-5 h-5" />
+                  <Icon className="w-5 h-5" strokeWidth={isActive ? 2 : 1.5} />
                   {item.badge && item.badge > 0 ? (
-                    <span className="absolute -top-1 -right-2 w-4 h-4 rounded-full bg-pink-500 text-[10px] font-bold text-white flex items-center justify-center animate-pulse">
+                    <span className="absolute -top-1 -right-2 w-4 h-4 rounded-full bg-ember-400 text-[10px] font-bold text-night-950 flex items-center justify-center">
                       {item.badge}
                     </span>
                   ) : null}
                 </div>
-                <span className="text-[11px]">{item.label}</span>
+                <span className="text-[10px] font-medium">{item.label}</span>
+                {isActive && <span className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-px bg-ember-400" />}
               </button>
             );
           })}

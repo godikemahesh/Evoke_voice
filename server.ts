@@ -29,7 +29,7 @@ const getGenAI = () => {
 
 // Health Check
 app.get("/api/health", (req, res) => {
-  res.json({ status: "ok", service: "Zuno AI Server" });
+  res.json({ status: "ok", service: "Evoke AI Server" });
 });
 
 // AI Script Generation Endpoint
@@ -38,7 +38,7 @@ app.post("/api/generate-prompt", async (req, res) => {
     const { creatorName, recipientName, relationship, occasion, tone, language, customInstructions, duration } = req.body;
 
     const ai = getGenAI();
-    const systemInstruction = `You are a professional celebrity scriptwriter for Zuno, a luxury AI gifting platform.
+    const systemInstruction = `You are a professional celebrity scriptwriter for Evoke, a luxury AI gifting platform.
 Craft a personalized, high-emotion video or voice call script for ${creatorName || "a celebrity"} addressing ${recipientName || "a fan"}.
 Tone: ${tone || "Heartfelt & Warm"}
 Language: ${language || "English"}
@@ -128,7 +128,7 @@ app.post("/api/recommend-creator", async (req, res) => {
 
     const response = await ai.models.generateContent({
       model: "gemini-3.6-flash",
-      contents: `You are the Zuno AI Concierge. Recommend 2 creators or advice based on user query: "${query}". Respond with friendly markdown advice.`,
+      contents: `You are the Evoke AI Concierge. Recommend 2 creators or advice based on user query: "${query}". Respond with friendly markdown advice.`,
     });
 
     res.json({ success: true, recommendation: response.text });
@@ -153,7 +153,7 @@ async function startServer() {
   }
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Zuno Server listening on http://0.0.0.0:${PORT}`);
+    console.log(`Evoke Server listening on http://0.0.0.0:${PORT}`);
   });
 }
 
